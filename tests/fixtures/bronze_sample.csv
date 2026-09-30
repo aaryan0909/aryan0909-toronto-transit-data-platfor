@@ -1,0 +1,5 @@
+date,time,day,station,code,min_delay,min_gap,bound,line,vehicle
+2025-01-01,08:15,Wednesday,BLOOR STATION,MUSAN,5,9,E,BD,5001
+2025-01-01,09:00,Wednesday,YONGE STATION,MUIRS,0,0,,YU,5002
+2025-01-02,17:45,Thursday,ST GEORGE STATION,TUSC,12,15,W,BD,5003
+2025-01-02,18:05,Thursday,FINCH STATION,EUAC,3,6,N,YU,5004

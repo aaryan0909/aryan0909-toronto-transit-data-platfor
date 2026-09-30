@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: silver
+    database: warehouse
+    schema: main
+    description: "Cleaned incident-level table loaded by src/ttc_platform into the same DuckDB file."
+    tables:
+      - name: silver_delays
+        description: "One row per TTC subway delay incident (silver layer)."

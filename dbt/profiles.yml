@@ -1,0 +1,13 @@
+# Local development profile. In production this would point at a warehouse
+# (BigQuery / Snowflake / Databricks SQL); here DuckDB is the warehouse,
+# which keeps the whole platform runnable on a laptop with zero accounts.
+# TTC_DUCKDB_PATH is set by the pipeline; for a manual dbt run:
+#   export TTC_DUCKDB_PATH=$PWD/data/warehouse.duckdb
+ttc_platform:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: "{{ env_var('TTC_DUCKDB_PATH', 'data/warehouse.duckdb') }}"
+      schema: main
+      threads: 1

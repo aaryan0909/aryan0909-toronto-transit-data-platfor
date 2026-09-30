@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Toronto Transit Data Platform — TTC Subway Delays</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <header>
+      <div>
+        <h1>Toronto Transit Data Platform</h1>
+        <p class="sub">Live data-quality-checked view of Toronto subway delays, from an open pipeline anyone can rerun.</p>
+        <p class="sub">Every number on this page is exported by the pipeline from real Toronto Open Data source files. No sample data.</p>
+      </div>
+      <nav>
+        <button id="nav-overview" class="active">Overview</button>
+        <button id="nav-quality">Data quality</button>
+      </nav>
+    </header>
+
+    <main id="view-overview">
+      <section class="cards" id="headline-cards"></section>
+      <section class="panel">
+        <h2>Monthly trend: incidents and delay minutes</h2>
+        <canvas id="chart-monthly"></canvas>
+      </section>
+      <div class="grid">
+        <section class="panel">
+          <h2>Delay minutes by hour of day</h2>
+          <canvas id="chart-hour"></canvas>
+        </section>
+        <section class="panel">
+          <h2>Delay minutes by line</h2>
+          <canvas id="chart-line"></canvas>
+        </section>
+      </div>
+      <div class="grid">
+        <section class="panel">
+          <h2>Worst stations (total delay minutes)</h2>
+          <table id="table-stations"></table>
+        </section>
+        <section class="panel">
+          <h2>Top delay codes</h2>
+          <table id="table-codes"></table>
+        </section>
+      </div>
+      <section class="panel">
+        <h2>Lines in detail</h2>
+        <table id="table-lines"></table>
+      </section>
+    </main>
+
+    <main id="view-quality" hidden>
+      <section class="cards" id="quality-cards"></section>
+      <section class="panel">
+        <h2>Data-quality checks from the latest pipeline run</h2>
+        <table id="table-checks"></table>
+        <p class="note">Checks are code, not vibes: they live in the standalone <code>honest_checks</code> package and every run emits a JSON + Markdown report. A failed check stays visible here instead of being quietly fixed in a spreadsheet. That is the point of the platform: a credible-looking wrong number is worse than no number.</p>
+      </section>
+      <section class="panel">
+        <h2>Source files (SHA-256 manifest)</h2>
+        <table id="table-manifest"></table>
+      </section>
+    </main>
+
+    <footer>
+      <p>Source: Toronto Open Data, TTC Subway Delay Data (CKAN package <code>ttc-subway-delay-data</code>). Pipeline: Python + DuckDB + dbt. Built by Aaryan Chawla.</p>
+    </footer>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

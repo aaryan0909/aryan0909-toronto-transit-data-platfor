@@ -1,0 +1,39 @@
+name: pipeline
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "0 12 * * 1" # Mondays 12:00 UTC: monthly source data, weekly is plenty
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e ".[dev]"
+      - run: pytest -q
+
+  run-pipeline:
+    if: github.event_name != 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e ".[dev]"
+      - run: python -m ttc_platform.run_pipeline
+      - name: Fail loudly if a data-quality check failed
+        run: |
+          python - <<'PY'
+          import json, sys
+          report = json.load(open("data/reports/latest_run.json"))
+          failed = [c["name"] for c in report["checks"] if not c["passed"]]
+          print("failed checks:", failed)
+          sys.exit(1 if failed else 0)
+          PY

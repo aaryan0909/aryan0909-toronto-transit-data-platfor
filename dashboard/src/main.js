@@ -30,10 +30,11 @@ function sumBy(rows, keyFn, fields) {
   return [...out.values()];
 }
 
-const [core, tables, daily] = await Promise.all([
+const [core, tables, daily, quarter] = await Promise.all([
   fetch("/data/dashboard.json").then((r) => r.json()),
   fetch("/data/tables_by_line.json").then((r) => r.json()),
   fetch("/data/daily.json").then((r) => r.json()),
+  fetch("/data/quarter.json").then((r) => r.json()),
 ]);
 const data = { ...core, ...tables };
 // By-line rows carry a short line code in `line`; restore canonical names.
@@ -45,11 +46,31 @@ data.daily_summary = daily.daily_summary.map(([d, incidents, delay]) =>
   ({ event_date: isoDay(d), incidents, total_delay_minutes: delay }));
 data.daily_by_line = daily.daily_by_line.map(([d, code, delay]) =>
   ({ event_date: isoDay(d), line_canonical: data.line_codes[code], total_delay_minutes: delay }));
+// Quarter-grain breakdowns ship as arrays plus lookups (see quarter.json).
+data.totals_by_quarter_line = quarter.totals_by_quarter_line.map(([event_year, event_quarter, code, incidents, total_delay_minutes, stations]) =>
+  ({ event_year, event_quarter, line_canonical: data.line_codes[code], incidents, total_delay_minutes, stations }));
+data.hour_by_quarter_line = quarter.hour_by_quarter_line.map(([event_year, event_quarter, code, event_hour, incidents, total_delay_minutes]) =>
+  ({ event_year, event_quarter, line_canonical: data.line_codes[code], event_hour, incidents, total_delay_minutes }));
+data.stations_by_quarter_line = quarter.stations_by_quarter_line.map(([event_year, event_quarter, code, si, incidents, total_delay_minutes, avg]) =>
+  ({ event_year, event_quarter, line_canonical: data.line_codes[code], station: quarter.station_names[si], incidents, total_delay_minutes, avg_delay_minutes_when_delayed: avg }));
+data.codes_by_quarter_line = quarter.codes_by_quarter_line.map(([event_year, event_quarter, code, codeName, incidents, total_delay_minutes]) =>
+  ({ event_year, event_quarter, line_canonical: data.line_codes[code], code: codeName, description: quarter.code_descriptions[codeName], incidents, total_delay_minutes }));
 const h = data.headline;
 const report = data.run_report;
 
-const state = { line: "ALL", year: "ALL", stationQuery: "" };
-const inYear = (yearVal, r) => state.year === "ALL" || String(yearVal) === state.year;
+const state = { line: "ALL", period: "ALL", stationQuery: "" };
+// state.period is "ALL", a year ("2025"), or a quarter ("2025-Q3").
+const periodYear = () => (state.period === "ALL" ? null : Number(state.period.slice(0, 4)));
+const periodQuarter = () => (state.period.includes("-Q") ? Number(state.period.slice(6)) : null);
+const periodLabel = () => (periodQuarter() === null ? `${periodYear()}` : `${periodYear()} Q${periodQuarter()}`);
+const inYear = (yearVal) => periodYear() === null || Number(yearVal) === periodYear();
+const inGrain = (r) => inYear(r.event_year) && (periodQuarter() === null || r.event_quarter === periodQuarter());
+const inPeriodYM = (ym) => { // "2025-03"
+  if (!inYear(ym.slice(0, 4))) return false;
+  return periodQuarter() === null || Math.floor((Number(ym.slice(5, 7)) - 1) / 3) + 1 === periodQuarter();
+};
+// Year-grain table, or the quarter-grain one when a quarter is selected.
+const grainRows = (yearKey, quarterKey) => data[periodQuarter() === null ? yearKey : quarterKey];
 const inLine = (r) => state.line === "ALL" || r.line_canonical === state.line;
 
 // --- Filter controls -------------------------------------------------------
@@ -57,13 +78,18 @@ const lineSelect = document.getElementById("filter-line");
 lineSelect.innerHTML =
   `<option value="ALL">All lines</option>` +
   data.delays_by_line.map((r) => `<option value="${r.line_canonical}">${lineLabel(r.line_canonical)}</option>`).join("");
-const yearSelect = document.getElementById("filter-year");
+const periodSelect = document.getElementById("filter-year");
 const years = [...new Set(data.totals_by_year_line.map((r) => r.event_year))].sort();
-yearSelect.innerHTML =
+const quartersByYear = {};
+for (const r of data.totals_by_quarter_line) (quartersByYear[r.event_year] ??= new Set()).add(r.event_quarter);
+periodSelect.innerHTML =
   `<option value="ALL">All time (${h.min_date.slice(0, 4)}–${h.max_date.slice(0, 4)})</option>` +
-  years.map((y) => `<option value="${y}">${y}</option>`).join("");
+  years.map((y) =>
+    `<option value="${y}">${y}</option>` +
+    [...(quartersByYear[y] || [])].sort().map((q) => `<option value="${y}-Q${q}">${y} Q${q}</option>`).join("")
+  ).join("");
 lineSelect.addEventListener("change", () => { state.line = lineSelect.value; render(); });
-yearSelect.addEventListener("change", () => { state.year = yearSelect.value; render(); });
+periodSelect.addEventListener("change", () => { state.period = periodSelect.value; render(); });
 document.getElementById("station-search").addEventListener("input", (e) => {
   state.stationQuery = e.target.value.trim().toLowerCase();
   renderStations();
@@ -103,10 +129,10 @@ function setChart(chart, labels, series) {
 
 // --- Renderers ---------------------------------------------------------------
 function renderHeadline() {
-  const rows = data.totals_by_year_line.filter((r) => inYear(r.event_year, r) && inLine(r));
+  const rows = grainRows("totals_by_year_line", "totals_by_quarter_line").filter((r) => inGrain(r) && inLine(r));
   const incidents = rows.reduce((a, r) => a + r.incidents, 0);
   const delay = rows.reduce((a, r) => a + r.total_delay_minutes, 0);
-  const range = state.year === "ALL" ? `${h.min_date} to ${h.max_date}` : `in ${state.year}`;
+  const range = state.period === "ALL" ? `${h.min_date} to ${h.max_date}` : `in ${periodLabel()}`;
   const scope = state.line === "ALL" ? `incidents, ${range}` : `incidents on ${lineLabel(state.line)}, ${range}`;
   document.getElementById("headline-cards").innerHTML = [
     card(fmt(incidents), scope),
@@ -115,15 +141,15 @@ function renderHeadline() {
     card(`${report.checks_passed}/${report.checks_total}`, "data-quality checks passed on the latest run"),
   ].join("");
   document.getElementById("filter-note").textContent =
-    state.line === "ALL" && state.year === "ALL"
+    state.line === "ALL" && state.period === "ALL"
       ? "Showing all lines, all time."
       : "Filters apply to the cards, charts, and tables on this page. Station and code tables show the top entries for the current selection.";
 }
 
 function renderMonthly() {
   const rows = state.line === "ALL"
-    ? data.monthly_trend.filter((r) => inYear(r.event_year_month.slice(0, 4), r))
-    : data.monthly_by_line.filter((r) => inLine(r) && inYear(r.event_year_month.slice(0, 4), r));
+    ? data.monthly_trend.filter((r) => inPeriodYM(r.event_year_month))
+    : data.monthly_by_line.filter((r) => inLine(r) && inPeriodYM(r.event_year_month));
   setChart(monthlyChart, rows.map((r) => r.event_year_month),
     [rows.map((r) => r.incidents), rows.map((r) => r.total_delay_minutes)]);
 }
@@ -132,7 +158,7 @@ function renderDaily() {
   let rows = state.line === "ALL"
     ? data.daily_summary.map((r) => ({ date: String(r.event_date).slice(0, 10), delay: r.total_delay_minutes }))
     : data.daily_by_line.filter(inLine).map((r) => ({ date: String(r.event_date).slice(0, 10), delay: r.total_delay_minutes }));
-  rows = rows.filter((r) => inYear(r.date.slice(0, 4), r)).sort((a, b) => a.date.localeCompare(b.date));
+  rows = rows.filter((r) => inPeriodYM(r.date.slice(0, 7))).sort((a, b) => a.date.localeCompare(b.date));
   const rolling = rows.map((r, i) => {
     const win = rows.slice(Math.max(0, i - 6), i + 1);
     return Math.round(win.reduce((a, w) => a + w.delay, 0) / win.length);
@@ -142,10 +168,10 @@ function renderDaily() {
 
 function renderHour() {
   let rows;
-  if (state.line === "ALL" && state.year === "ALL") {
+  if (state.line === "ALL" && state.period === "ALL") {
     rows = data.delays_by_hour;
   } else {
-    const filtered = data.hour_by_year_line.filter((r) => inLine(r) && inYear(r.event_year, r));
+    const filtered = grainRows("hour_by_year_line", "hour_by_quarter_line").filter((r) => inLine(r) && inGrain(r));
     rows = sumBy(filtered, (r) => r.event_hour, ["incidents", "total_delay_minutes"])
       .sort((a, b) => a.event_hour - b.event_hour);
   }
@@ -156,7 +182,7 @@ function renderLineChart() {
   // Per-line totals for the selected period: the comparison stays visible
   // even when one line is selected, so the selection keeps its context.
   const rows = sumBy(
-    data.totals_by_year_line.filter((r) => inYear(r.event_year, r)),
+    grainRows("totals_by_year_line", "totals_by_quarter_line").filter((r) => inGrain(r)),
     (r) => r.line_canonical, ["incidents", "total_delay_minutes"])
     .sort((a, b) => b.total_delay_minutes - a.total_delay_minutes);
   setChart(lineChart, rows.map((r) => lineLabel(r.line_canonical)), [rows.map((r) => r.total_delay_minutes)]);
@@ -167,11 +193,11 @@ function renderLineChart() {
 
 function stationRows() {
   let rows;
-  if (state.line === "ALL" && state.year === "ALL") {
+  if (state.line === "ALL" && state.period === "ALL") {
     rows = data.delays_by_station; // top 50 exported
   } else {
-    const filtered = data.stations_by_year_line.filter((r) => inLine(r) && inYear(r.event_year, r));
-    rows = state.year === "ALL"
+    const filtered = grainRows("stations_by_year_line", "stations_by_quarter_line").filter((r) => inLine(r) && inGrain(r));
+    rows = state.period === "ALL"
       ? sumBy(filtered, (r) => r.station, ["incidents", "total_delay_minutes"])
           .map((r) => ({ ...r, avg_delay_minutes_when_delayed: null }))
       : filtered;
@@ -188,10 +214,10 @@ function renderStations() {
 
 function renderCodes() {
   let rows;
-  if (state.line === "ALL" && state.year === "ALL") {
+  if (state.line === "ALL" && state.period === "ALL") {
     rows = data.delays_by_code;
   } else {
-    const filtered = data.codes_by_year_line.filter((r) => inLine(r) && inYear(r.event_year, r));
+    const filtered = grainRows("codes_by_year_line", "codes_by_quarter_line").filter((r) => inLine(r) && inGrain(r));
     rows = sumBy(filtered, (r) => r.code, ["incidents", "total_delay_minutes"])
       .sort((a, b) => b.total_delay_minutes - a.total_delay_minutes);
   }

@@ -91,11 +91,12 @@ src/ttc_platform/   ingest.py · transform.py · quality.py (adapter) · run_pip
 src/honest_checks/  standalone data-quality checker package (own README, CLI, config format)
 dbt/                dbt-duckdb project: 6 gold models + sources.yml
 tests/              pytest unit tests over transform logic + DQ checks (small fixture)
-dashboard/          Vite + Chart.js app reading public/data/dashboard.json;
-                    line/year filters, a daily view with 7-day rolling
-                    average, and station search, all fed by pre-aggregated
-                    breakdowns the pipeline exports (nothing is computed
-                    from raw rows in the browser)
+dashboard/          Vite + Chart.js app reading the exported JSON in
+                    public/data/; line and period (all time / year / quarter)
+                    filters, a daily view with 7-day rolling average, and
+                    station search, all fed by pre-aggregated breakdowns
+                    the pipeline exports (nothing is computed from raw
+                    rows in the browser)
 docs/               latest_run.md (generated) · github-actions-workflow.yml.txt
 data/               gitignored: raw / bronze / silver / gold / reports / warehouse.duckdb
 ```

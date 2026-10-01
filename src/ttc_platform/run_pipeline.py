@@ -95,11 +95,12 @@ def export_dashboard(con: duckdb.DuckDBPyConnection, run_report: dict) -> None:
     # --- Filterable breakdowns -------------------------------------------
     # The dashboard's line/year filters need aggregates at those grains,
     # computed here from silver (never in the browser from raw rows).
-    # The export is split across three files, each small enough to ship
+    # The export is split across four files, each small enough to ship
     # through the GitHub/Vercel file APIs, which cap a single call:
     #   dashboard.json      headline, gold tables, totals + hourly breakdown
     #   tables_by_line.json monthly / station / code breakdowns by line
     #   daily.json          daily series as compact arrays (see below)
+    #   quarter.json        the four breakdowns at quarter grain, as arrays
     # By-line rows carry a short line code in `line`; `line_codes` in
     # dashboard.json maps it back to the canonical name, so the files stay
     # self-describing.
@@ -220,6 +221,133 @@ def export_dashboard(con: duckdb.DuckDBPyConnection, run_report: dict) -> None:
         "daily_by_line": by_line_rows,
     }
     (DASHBOARD_DATA_DIR / "daily.json").write_text(json.dumps(daily_payload))
+
+    # --- Quarter-grain breakdowns -----------------------------------------
+    # Same four breakdowns at (year, quarter, line) grain so the period
+    # filter can offer quarters. Object format measured 89-126KB per table
+    # here (station names and code descriptions repeat across quarters), so
+    # quarter.json ships arrays plus two lookups: station_names (rows carry
+    # an index) and code_descriptions (rows carry the code only).
+    q_totals = con.execute("""
+        select extract(year from event_date)::int as event_year,
+               extract(quarter from event_date)::int as event_quarter,
+               line_canonical, count(*) as incidents,
+               sum(min_delay) as total_delay_minutes,
+               count(distinct station) as stations
+        from main.silver_delays
+        group by event_year, event_quarter, line_canonical
+        order by event_year, event_quarter, line_canonical
+    """).fetchdf()
+    q_hour = con.execute("""
+        select extract(year from event_date)::int as event_year,
+               extract(quarter from event_date)::int as event_quarter,
+               line_canonical, event_hour, count(*) as incidents,
+               sum(min_delay) as total_delay_minutes
+        from main.silver_delays
+        group by event_year, event_quarter, line_canonical, event_hour
+        order by event_year, event_quarter, line_canonical, event_hour
+    """).fetchdf()
+    q_stations = con.execute("""
+        select event_year, event_quarter, line_canonical, station, incidents,
+               total_delay_minutes, avg_delay_minutes_when_delayed
+        from (
+            select *, row_number() over (
+                partition by event_year, event_quarter, line_canonical
+                order by total_delay_minutes desc) as rn
+            from (
+                select extract(year from event_date)::int as event_year,
+                       extract(quarter from event_date)::int as event_quarter,
+                       line_canonical, station, count(*) as incidents,
+                       sum(min_delay) as total_delay_minutes,
+                       round(avg(case when min_delay > 0 then min_delay end), 2)
+                           as avg_delay_minutes_when_delayed
+                from main.silver_delays
+                where station <> ''
+                group by event_year, event_quarter, line_canonical, station
+            )
+        )
+        where rn <= 15
+        order by event_year, event_quarter, line_canonical, total_delay_minutes desc
+    """).fetchdf()
+    q_codes = con.execute("""
+        select event_year, event_quarter, line_canonical, code, description,
+               incidents, total_delay_minutes
+        from (
+            select *, row_number() over (
+                partition by event_year, event_quarter, line_canonical
+                order by total_delay_minutes desc) as rn
+            from (
+                select extract(year from event_date)::int as event_year,
+                       extract(quarter from event_date)::int as event_quarter,
+                       line_canonical, code_clean as code,
+                       coalesce(any_value(code_description),
+                                'Not in reference table') as description,
+                       count(*) as incidents,
+                       sum(min_delay) as total_delay_minutes
+                from main.silver_delays
+                group by event_year, event_quarter, line_canonical, code_clean
+            )
+        )
+        where rn <= 12
+        order by event_year, event_quarter, line_canonical, total_delay_minutes desc
+    """).fetchdf()
+    station_names = list(dict.fromkeys(q_stations["station"]))
+    station_index = {name: i for i, name in enumerate(station_names)}
+    code_descriptions = dict(zip(q_codes["code"], q_codes["description"]))
+
+    def num(v):
+        return None if v is None or (isinstance(v, float) and pd.isna(v)) else (
+            int(v) if float(v).is_integer() else float(v))
+
+    quarter_payload = {
+        "quarter_fields": {
+            "totals_by_quarter_line": ["event_year", "event_quarter", "line_code",
+                                       "incidents", "total_delay_minutes", "stations"],
+            "hour_by_quarter_line": ["event_year", "event_quarter", "line_code",
+                                     "event_hour", "incidents", "total_delay_minutes"],
+            "stations_by_quarter_line": ["event_year", "event_quarter", "line_code",
+                                         "station_index", "incidents", "total_delay_minutes",
+                                         "avg_delay_minutes_when_delayed"],
+            "codes_by_quarter_line": ["event_year", "event_quarter", "line_code",
+                                      "code", "incidents", "total_delay_minutes"],
+            "station_names": "index lookup for station_index",
+            "code_descriptions": "description lookup for codes_by_quarter_line codes",
+            "line_codes": "see line_codes in dashboard.json",
+        },
+        "station_names": station_names,
+        "code_descriptions": code_descriptions,
+        "totals_by_quarter_line": [
+            [int(y), int(q), LINE_SHORT_CODES[line], int(i), int(d), int(s)]
+            for y, q, line, i, d, s in zip(
+                q_totals["event_year"], q_totals["event_quarter"],
+                q_totals["line_canonical"], q_totals["incidents"],
+                q_totals["total_delay_minutes"], q_totals["stations"])
+        ],
+        "hour_by_quarter_line": [
+            [int(y), int(q), LINE_SHORT_CODES[line], int(hr), int(i), int(d)]
+            for y, q, line, hr, i, d in zip(
+                q_hour["event_year"], q_hour["event_quarter"],
+                q_hour["line_canonical"], q_hour["event_hour"],
+                q_hour["incidents"], q_hour["total_delay_minutes"])
+        ],
+        "stations_by_quarter_line": [
+            [int(y), int(q), LINE_SHORT_CODES[line], station_index[st],
+             int(i), int(d), num(avg)]
+            for y, q, line, st, i, d, avg in zip(
+                q_stations["event_year"], q_stations["event_quarter"],
+                q_stations["line_canonical"], q_stations["station"],
+                q_stations["incidents"], q_stations["total_delay_minutes"],
+                q_stations["avg_delay_minutes_when_delayed"])
+        ],
+        "codes_by_quarter_line": [
+            [int(y), int(q), LINE_SHORT_CODES[line], code, int(i), int(d)]
+            for y, q, line, code, i, d in zip(
+                q_codes["event_year"], q_codes["event_quarter"],
+                q_codes["line_canonical"], q_codes["code"],
+                q_codes["incidents"], q_codes["total_delay_minutes"])
+        ],
+    }
+    (DASHBOARD_DATA_DIR / "quarter.json").write_text(json.dumps(quarter_payload))
 
 
 def main() -> dict:

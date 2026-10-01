@@ -2,8 +2,9 @@
 
 Runs export_dashboard against a tiny in-memory DuckDB warehouse built from
 hand-made rows, so the tests never touch the real data or the network.
-The export ships as three files (dashboard.json, tables_by_line.json,
-daily.json); the fixture merges them the way the dashboard's JS does.
+The export ships as four files (dashboard.json, tables_by_line.json,
+daily.json, quarter.json); the fixture merges them the way the dashboard's
+JS does.
 """
 import json
 from datetime import date
@@ -63,7 +64,7 @@ def exported(tmp_path, monkeypatch):
     con.close()
     dash = tmp_path / "dash"
     merged = {}
-    for name in ["dashboard.json", "tables_by_line.json", "daily.json"]:
+    for name in ["dashboard.json", "tables_by_line.json", "daily.json", "quarter.json"]:
         merged.update(json.loads((dash / name).read_text()))
     return merged
 
@@ -104,3 +105,24 @@ def test_daily_by_line_sums_to_daily_summary(exported):
     assert by_line == daily
     # Epoch day for 2024-01-02 is 19724; its all-lines delay is 10 minutes.
     assert daily[19724] == 10
+
+
+def test_quarter_breakdowns_reconcile_and_decode(exported):
+    # Quarter arrays: totals [year, quarter, line, incidents, delay, stations].
+    totals = exported["totals_by_quarter_line"]
+    assert sum(r[3] for r in totals) == exported["headline"]["incidents"] == 5
+    assert sum(r[4] for r in totals) == exported["headline"]["total_delay_minutes"] == 25
+    by_key = {(r[0], r[1], r[2]): r for r in totals}
+    assert by_key[(2024, 1, "L1")][3] == 2  # both Jan 2024 Line 1 rows are Q1
+    assert by_key[(2025, 1, "L2")][4] == 3
+    # Station rows decode through the station_names index.
+    names = exported["station_names"]
+    decoded = {(r[0], r[1], r[2], names[r[3]]) for r in exported["stations_by_quarter_line"]}
+    assert (2024, 1, "L1", "BLOOR STATION") in decoded
+    # Code rows decode through the description lookup.
+    assert exported["code_descriptions"]["S2"] == "DESC TWO"
+    code_keys = {(r[0], r[1], r[2], r[3]) for r in exported["codes_by_quarter_line"]}
+    assert (2025, 1, "L1", "S2") in code_keys
+    # Hourly quarter rows cover the fixture's hours.
+    hours = {(r[0], r[1], r[2], r[3]) for r in exported["hour_by_quarter_line"]}
+    assert (2025, 1, "L1", 17) in hours

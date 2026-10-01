@@ -35,7 +35,18 @@
         </label>
         <span class="note" id="filter-note"></span>
       </section>
-      <section class="cards" id="headline-cards"></section>
+      <section class="panel error-panel" id="load-error" role="alert" hidden>
+        <h2>Dashboard data could not be loaded</h2>
+        <p class="note" id="load-error-detail">Something went wrong loading the dashboard data files.</p>
+        <button id="retry-load" type="button">Retry</button>
+      </section>
+      <section class="cards" id="headline-cards" aria-busy="true">
+        <div class="card skeleton" aria-hidden="true"><div class="value skeleton-bar"></div><div class="label skeleton-bar short"></div></div>
+        <div class="card skeleton" aria-hidden="true"><div class="value skeleton-bar"></div><div class="label skeleton-bar short"></div></div>
+        <div class="card skeleton" aria-hidden="true"><div class="value skeleton-bar"></div><div class="label skeleton-bar short"></div></div>
+        <div class="card skeleton" aria-hidden="true"><div class="value skeleton-bar"></div><div class="label skeleton-bar short"></div></div>
+        <p class="visually-hidden" role="status">Loading dashboard data</p>
+      </section>
       <section class="panel">
         <h2>Monthly trend: incidents and delay minutes</h2>
         <canvas id="chart-monthly"></canvas>

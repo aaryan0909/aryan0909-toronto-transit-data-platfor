@@ -29,3 +29,13 @@ td.num, th.num { text-align:right; font-variant-numeric:tabular-nums; }
 footer { padding:1rem 2rem 2rem; color:var(--muted); font-size:.88rem; }
 canvas { max-height:320px; }
 code { font-size:.85em; }
+.visually-hidden { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+.skeleton-bar { height:1.4rem; border-radius:6px; background:linear-gradient(90deg,var(--line) 25%,#f0eee9 50%,var(--line) 75%); background-size:200% 100%; animation:skeleton-pulse 1.4s ease-in-out infinite; }
+.skeleton .label.skeleton-bar { height:.85rem; margin-top:.5rem; }
+.skeleton-bar.short { width:65%; }
+@keyframes skeleton-pulse { 0%{background-position:200% 0;} 100%{background-position:-200% 0;} }
+@media (prefers-reduced-motion: reduce) { .skeleton-bar { animation:none; } }
+.error-panel { border-color:var(--red); }
+.error-panel h2 { color:var(--red); }
+.error-panel button { min-height:44px; padding:.5rem 1.2rem; border:1px solid var(--red); background:var(--red); color:#fff; border-radius:999px; cursor:pointer; font-size:.95rem; }
+.empty-state { color:var(--muted); text-align:center; padding:1rem .4rem; }

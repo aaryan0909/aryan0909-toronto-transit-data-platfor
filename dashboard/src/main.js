@@ -15,9 +15,12 @@ function card(value, label) {
   return `<div class="card"><div class="value">${value}</div><div class="label">${label}</div></div>`;
 }
 function table(el, headers, rows) {
+  const body = rows.length
+    ? rows.map((r) => "<tr>" + r.map((c, i) => `<td class="${headers[i].num ? "num" : ""}">${c}</td>`).join("") + "</tr>").join("")
+    : `<tr><td class="empty-state" colspan="${headers.length}">No data matches this selection.</td></tr>`;
   el.innerHTML =
     "<thead><tr>" + headers.map((h) => `<th class="${h.num ? "num" : ""}">${h.t}</th>`).join("") + "</tr></thead>" +
-    "<tbody>" + rows.map((r) => "<tr>" + r.map((c, i) => `<td class="${headers[i].num ? "num" : ""}">${c}</td>`).join("") + "</tr>").join("") + "</tbody>";
+    "<tbody>" + body + "</tbody>";
 }
 // Sum rows into groups keyed by keyFn, adding the numeric fields listed.
 function sumBy(rows, keyFn, fields) {
@@ -30,12 +33,31 @@ function sumBy(rows, keyFn, fields) {
   return [...out.values()];
 }
 
-const [core, tables, daily, quarter] = await Promise.all([
-  fetch("/data/dashboard.json").then((r) => r.json()),
-  fetch("/data/tables_by_line.json").then((r) => r.json()),
-  fetch("/data/daily.json").then((r) => r.json()),
-  fetch("/data/quarter.json").then((r) => r.json()),
-]);
+async function fetchJson(url) {
+  const r = await fetch(url);
+  if (!r.ok) throw new Error(`${url} returned ${r.status}`);
+  return r.json();
+}
+let core, tables, daily, quarter;
+try {
+  [core, tables, daily, quarter] = await Promise.all([
+    fetchJson("/data/dashboard.json"),
+    fetchJson("/data/tables_by_line.json"),
+    fetchJson("/data/daily.json"),
+    fetchJson("/data/quarter.json"),
+  ]);
+} catch (err) {
+  const cards = document.getElementById("headline-cards");
+  cards.innerHTML = "";
+  cards.removeAttribute("aria-busy");
+  const panel = document.getElementById("load-error");
+  panel.hidden = false;
+  document.getElementById("load-error-detail").textContent =
+    `The dashboard data files could not be loaded (${err.message}). Check your connection and try again.`;
+  document.getElementById("retry-load").addEventListener("click", () => location.reload());
+  throw err;
+}
+document.getElementById("headline-cards").removeAttribute("aria-busy");
 const data = { ...core, ...tables };
 // By-line rows carry a short line code in `line`; restore canonical names.
 for (const key of ["totals_by_year_line", "hour_by_year_line", "monthly_by_line", "stations_by_year_line", "codes_by_year_line"])

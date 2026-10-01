@@ -1,1 +1,282 @@
-IiIiUGlwZWxpbmUgb3JjaGVzdHJhdGlvbiBhbmQgZGFzaGJvYXJkIGV4cG9ydC4KClJ1bjogIHB5dGhvbiAtbSB0dGNfcGxhdGZvcm0ucnVuX3BpcGVsaW5lClN0ZXBzOiBpbmdlc3QgLT4gYnJvbnplIC0+IHNpbHZlciAtPiBsb2FkIER1Y2tEQiAtPiBkYnQgZ29sZCAtPiBEUSBjaGVja3MKLT4gcnVuIHJlcG9ydCAoSlNPTiArIE1hcmtkb3duKSAtPiBkYXNoYm9hcmQgSlNPTiBleHBvcnQuCgpJZGVtcG90ZW5jeTogaW5nZXN0IHNraXBzIHVuY2hhbmdlZCBmaWxlcyAoU0hBLTI1NiBtYW5pZmVzdCksIGJyb256ZQpyZXdyaXRlcyBpdHMgcGFydGl0aW9ucywgc2lsdmVyIGFuZCBnb2xkIGFyZSBmdWxsIHJlYnVpbGRzIG9mIGRldGVybWluaXN0aWMKdHJhbnNmb3JtcyBvdmVyIHRoZSBzYW1lIGlucHV0cywgc28gcmUtcnVubmluZyBwcm9kdWNlcyB0aGUgc2FtZSBvdXRwdXRzLgpGdWxsIHJlYnVpbGQgaXMgdGhlIGhvbmVzdCBjaG9pY2UgYXQgdGhpcyBzY2FsZSAofjcyayByb3dzKTsgdGhlIGRlc2lnbiBkb2MKZXhwbGFpbnMgd2hlcmUgaW5jcmVtZW50YWwgbW9kZWxzIHdvdWxkIHNsb3QgaW4gYXQgcHJvZHVjdGlvbiBzY2FsZS4KIiIiCmZyb20gX19mdXR1cmVfXyBpbXBvcnQgYW5ub3RhdGlvbnMKCmltcG9ydCBqc29uCmltcG9ydCBzdWJwcm9jZXNzCmltcG9ydCBzeXMKZnJvbSBkYXRldGltZSBpbXBvcnQgZGF0ZXRpbWUsIHRpbWV6b25lCmZyb20gcGF0aGxpYiBpbXBvcnQgUGF0aAoKaW1wb3J0IGR1Y2tkYgoKZnJvbSAuIGltcG9ydCBpbmdlc3QsIHF1YWxpdHksIHRyYW5zZm9ybQpmcm9tIC5jb25maWcgaW1wb3J0ICgKICAgIERBU0hCT0FSRF9EQVRBX0RJUiwKICAgIERBVEFfRElSLAogICAgR09MRF9ESVIsCiAgICBSRVBPUlRfRElSLAogICAgUkVQT19ST09ULAogICAgV0FSRUhPVVNFX1BBVEgsCikKCgpkZWYgX3J1bl9kYnQoKSAtPiBzdHI6CiAgICBpbXBvcnQgb3MKICAgIGltcG9ydCBzaHV0aWwKCiAgICBkYnRfZGlyID0gUkVQT19ST09UIC8gImRidCIKICAgIGRidF9iaW4gPSBzaHV0aWwud2hpY2goImRidCIpIG9yIHN0cihQYXRoKHN5cy5leGVjdXRhYmxlKS5wYXJlbnQgLyAiZGJ0IikKICAgIGVudiA9IHsqKm9zLmVudmlyb24sICJUVENfRFVDS0RCX1BBVEgiOiBzdHIoV0FSRUhPVVNFX1BBVEgpfQogICAgcHJvYyA9IHN1YnByb2Nlc3MucnVuKAogICAgICAgIFtkYnRfYmluLCAicnVuIiwgIi0tcHJvamVjdC1kaXIiLCBzdHIoZGJ0X2RpciksICItLXByb2ZpbGVzLWRpciIsIHN0cihkYnRfZGlyKV0sCiAgICAgICAgY2FwdHVyZV9vdXRwdXQ9VHJ1ZSwgdGV4dD1UcnVlLCBlbnY9ZW52LAogICAgKQogICAgaWYgcHJvYy5yZXR1cm5jb2RlICE9IDA6CiAgICAgICAgcmFpc2UgUnVudGltZUVycm9yKGYiZGJ0IHJ1biBmYWlsZWQ6XG57cHJvYy5zdGRvdXR9XG57cHJvYy5zdGRlcnJ9IikKICAgIHJldHVybiAic3VjY2VzcyIKCgpkZWYgZXhwb3J0X2Rhc2hib2FyZChjb246IGR1Y2tkYi5EdWNrREJQeUNvbm5lY3Rpb24sIHJ1bl9yZXBvcnQ6IGRpY3QpIC0+IE5vbmU6CiAgICBEQVNIQk9BUkRfREFUQV9ESVIubWtkaXIocGFyZW50cz1UcnVlLCBleGlzdF9vaz1UcnVlKQogICAgR09MRF9ESVIubWtkaXIocGFyZW50cz1UcnVlLCBleGlzdF9vaz1UcnVlKQogICAgdGFibGVzID0gWyJkYWlseV9zdW1tYXJ5IiwgImRlbGF5c19ieV9saW5lIiwgImRlbGF5c19ieV9zdGF0aW9uIiwKICAgICAgICAgICAgICAiZGVsYXlzX2J5X2hvdXIiLCAibW9udGhseV90cmVuZCIsICJkZWxheXNfYnlfY29kZSJdCiAgICBwYXlsb2FkOiBkaWN0ID0geyJydW5fcmVwb3J0IjogcnVuX3JlcG9ydH0KICAgIGZvciB0YWJsZSBpbiB0YWJsZXM6CiAgICAgICAgcm93cyA9IGNvbi5leGVjdXRlKGYic2VsZWN0ICogZnJvbSBtYWluLnt0YWJsZX0iKS5mZXRjaGRmKCkKICAgICAgICByb3dzLnRvX3BhcnF1ZXQoR09MRF9ESVIgLyBmInt0YWJsZX0ucGFycXVldCIsIGluZGV4PUZhbHNlKQogICAgICAgIGlmIHRhYmxlID09ICJkYWlseV9zdW1tYXJ5IjoKICAgICAgICAgICAgY29udGludWUgICMgZXhwb3J0ZWQgYmVsb3csIGFsb25nc2lkZSB0aGUgZmlsdGVyYWJsZSBicmVha2Rvd25zCiAgICAgICAgaWYgdGFibGUgPT0gImRlbGF5c19ieV9zdGF0aW9uIjoKICAgICAgICAgICAgcm93cyA9IHJvd3MuaGVhZCg1MCkgICMgZGFzaGJvYXJkIHNob3dzIGEgbGVhZGVyYm9hcmQsIG5vdCAxLDQ4OSBmcmVlLXRleHQgdmFsdWVzCiAgICAgICAgcGF5bG9hZFt0YWJsZV0gPSBqc29uLmxvYWRzKHJvd3MudG9fanNvbihvcmllbnQ9InJlY29yZHMiLCBkYXRlX2Zvcm1hdD0iaXNvIikpCiAgICBzdW1tYXJ5ID0gY29uLmV4ZWN1dGUoCiAgICAgICAgIiIiCiAgICAgICAgc2VsZWN0IGNvdW50KCopIGluY2lkZW50cywgc3VtKG1pbl9kZWxheSkgdG90YWxfZGVsYXlfbWludXRlcywKICAgICAgICAgICAgICAgbWluKGV2ZW50X2RhdGUpOjp2YXJjaGFyIG1pbl9kYXRlLCBtYXgoZXZlbnRfZGF0ZSk6OnZhcmNoYXIgbWF4X2RhdGUsCiAgICAgICAgICAgICAgIGNvdW50KGRpc3RpbmN0IHN0YXRpb24pIHN0YXRpb25zLCBjb3VudChkaXN0aW5jdCBsaW5lX2Nhbm9uaWNhbCkgbGluZXMKICAgICAgICBmcm9tIG1haW4uc2lsdmVyX2RlbGF5cwogICAgICAgICIiIgogICAgKS5mZXRjaG9uZSgpCiAgICBwYXlsb2FkWyJoZWFkbGluZSJdID0gewogICAgICAgICJpbmNpZGVudHMiOiBpbnQoc3VtbWFyeVswXSksCiAgICAgICAgInRvdGFsX2RlbGF5X21pbnV0ZXMiOiBpbnQoc3VtbWFyeVsxXSksCiAgICAgICAgIm1pbl9kYXRlIjogc3VtbWFyeVsyXSwKICAgICAgICAibWF4X2RhdGUiOiBzdW1tYXJ5WzNdLAogICAgICAgICJzdGF0aW9ucyI6IGludChzdW1tYXJ5WzRdKSwKICAgICAgICAibGluZXMiOiBpbnQoc3VtbWFyeVs1XSksCiAgICB9CgogICAgIyAtLS0gRmlsdGVyYWJsZSBicmVha2Rvd25zIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KICAgICMgVGhlIGRhc2hib2FyZCdzIGxpbmUveWVhciBmaWx0ZXJzIG5lZWQgYWdncmVnYXRlcyBhdCB0aG9zZSBncmFpbnMsCiAgICAjIGNvbXB1dGVkIGhlcmUgZnJvbSBzaWx2ZXIgKG5ldmVyIGluIHRoZSBicm93c2VyIGZyb20gcmF3IHJvd3MpLgogICAgIyBEYWlseSBzZXJpZXM6IGdvbGQgZGFpbHlfc3VtbWFyeSBmb3IgYWxsIGxpbmVzLCBwbHVzIGEgYnktbGluZSBkYWlseQogICAgIyBzZXJpZXMgc28gdGhlIGRhaWx5IGNoYXJ0IGNhbiBmb2xsb3cgdGhlIGxpbmUgZmlsdGVyLgogICAgZGFpbHkgPSBjb24uZXhlY3V0ZSgic2VsZWN0ICogZnJvbSBtYWluLmRhaWx5X3N1bW1hcnkiKS5mZXRjaGRmKCkKICAgIHBheWxvYWRbImRhaWx5X3N1bW1hcnkiXSA9IGpzb24ubG9hZHMoCiAgICAgICAgZGFpbHkudG9fanNvbihvcmllbnQ9InJlY29yZHMiLCBkYXRlX2Zvcm1hdD0iaXNvIikpCiAgICBicmVha2Rvd25fcXVlcmllcyA9IHsKICAgICAgICAjIE9uZSByb3cgcGVyICh5ZWFyLCBsaW5lKTogZHJpdmVzIHRoZSBoZWFkbGluZSBjYXJkcyB1bmRlciBmaWx0ZXJzLgogICAgICAgICJ0b3RhbHNfYnlfeWVhcl9saW5lIjogIiIiCiAgICAgICAgICAgIHNlbGVjdCBleHRyYWN0KHllYXIgZnJvbSBldmVudF9kYXRlKTo6aW50IGFzIGV2ZW50X3llYXIsCiAgICAgICAgICAgICAgICAgICBsaW5lX2Nhbm9uaWNhbCwgY291bnQoKikgYXMgaW5jaWRlbnRzLAogICAgICAgICAgICAgICAgICAgc3VtKG1pbl9kZWxheSkgYXMgdG90YWxfZGVsYXlfbWludXRlcywKICAgICAgICAgICAgICAgICAgIGNvdW50KGRpc3RpbmN0IHN0YXRpb24pIGFzIHN0YXRpb25zCiAgICAgICAgICAgIGZyb20gbWFpbi5zaWx2ZXJfZGVsYXlzCiAgICAgICAgICAgIGdyb3VwIGJ5IGV2ZW50X3llYXIsIGxpbmVfY2Fub25pY2FsCiAgICAgICAgICAgIG9yZGVyIGJ5IGV2ZW50X3llYXIsIGxpbmVfY2Fub25pY2FsCiAgICAgICAgIiIiLAogICAgICAgICJtb250aGx5X2J5X2xpbmUiOiAiIiIKICAgICAgICAgICAgc2VsZWN0IGV2ZW50X3llYXJfbW9udGgsIGxpbmVfY2Fub25pY2FsLCBjb3VudCgqKSBhcyBpbmNpZGVudHMsCiAgICAgICAgICAgICAgICAgICBzdW0obWluX2RlbGF5KSBhcyB0b3RhbF9kZWxheV9taW51dGVzCiAgICAgICAgICAgIGZyb20gbWFpbi5zaWx2ZXJfZGVsYXlzCiAgICAgICAgICAgIGdyb3VwIGJ5IGV2ZW50X3llYXJfbW9udGgsIGxpbmVfY2Fub25pY2FsCiAgICAgICAgICAgIG9yZGVyIGJ5IGV2ZW50X3llYXJfbW9udGgsIGxpbmVfY2Fub25pY2FsCiAgICAgICAgIiIiLAogICAgICAgICJkYWlseV9ieV9saW5lIjogIiIiCiAgICAgICAgICAgIHNlbGVjdCBldmVudF9kYXRlLCBsaW5lX2Nhbm9uaWNhbCwgY291bnQoKikgYXMgaW5jaWRlbnRzLAogICAgICAgICAgICAgICAgICAgc3VtKG1pbl9kZWxheSkgYXMgdG90YWxfZGVsYXlfbWludXRlcwogICAgICAgICAgICBmcm9tIG1haW4uc2lsdmVyX2RlbGF5cwogICAgICAgICAgICBncm91cCBieSBldmVudF9kYXRlLCBsaW5lX2Nhbm9uaWNhbAogICAgICAgICAgICBvcmRlciBieSBldmVudF9kYXRlLCBsaW5lX2Nhbm9uaWNhbAogICAgICAgICIiIiwKICAgICAgICAiaG91cl9ieV95ZWFyX2xpbmUiOiAiIiIKICAgICAgICAgICAgc2VsZWN0IGV4dHJhY3QoeWVhciBmcm9tIGV2ZW50X2RhdGUpOjppbnQgYXMgZXZlbnRfeWVhciwKICAgICAgICAgICAgICAgICAgIGxpbmVfY2Fub25pY2FsLCBldmVudF9ob3VyLCBjb3VudCgqKSBhcyBpbmNpZGVudHMsCiAgICAgICAgICAgICAgICAgICBzdW0obWluX2RlbGF5KSBhcyB0b3RhbF9kZWxheV9taW51dGVzCiAgICAgICAgICAgIGZyb20gbWFpbi5zaWx2ZXJfZGVsYXlzCiAgICAgICAgICAgIGdyb3VwIGJ5IGV2ZW50X3llYXIsIGxpbmVfY2Fub25pY2FsLCBldmVudF9ob3VyCiAgICAgICAgICAgIG9yZGVyIGJ5IGV2ZW50X3llYXIsIGxpbmVfY2Fub25pY2FsLCBldmVudF9ob3VyCiAgICAgICAgIiIiLAogICAgICAgICMgVG9wIDE1IHN0YXRpb25zIHBlciAoeWVhciwgbGluZSk7IHRoZSBhbGwteWVhcnMvYWxsLWxpbmVzIHZpZXcKICAgICAgICAjIGtlZXBzIHVzaW5nIGRlbGF5c19ieV9zdGF0aW9uIGFib3ZlLgogICAgICAgICJzdGF0aW9uc19ieV95ZWFyX2xpbmUiOiAiIiIKICAgICAgICAgICAgc2VsZWN0IGV2ZW50X3llYXIsIGxpbmVfY2Fub25pY2FsLCBzdGF0aW9uLCBpbmNpZGVudHMsCiAgICAgICAgICAgICAgICAgICB0b3RhbF9kZWxheV9taW51dGVzLCBhdmdfZGVsYXlfbWludXRlc193aGVuX2RlbGF5ZWQKICAgICAgICAgICAgZnJvbSAoCiAgICAgICAgICAgICAgICBzZWxlY3QgKiwgcm93X251bWJlcigpIG92ZXIgKAogICAgICAgICAgICAgICAgICAgIHBhcnRpdGlvbiBieSBldmVudF95ZWFyLCBsaW5lX2Nhbm9uaWNhbAogICAgICAgICAgICAgICAgICAgIG9yZGVyIGJ5IHRvdGFsX2RlbGF5X21pbnV0ZXMgZGVzYykgYXMgcm4KICAgICAgICAgICAgICAgIGZyb20gKAogICAgICAgICAgICAgICAgICAgIHNlbGVjdCBleHRyYWN0KHllYXIgZnJvbSBldmVudF9kYXRlKTo6aW50IGFzIGV2ZW50X3llYXIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgIGxpbmVfY2Fub25pY2FsLCBzdGF0aW9uLCBjb3VudCgqKSBhcyBpbmNpZGVudHMsCiAgICAgICAgICAgICAgICAgICAgICAgICAgIHN1bShtaW5fZGVsYXkpIGFzIHRvdGFsX2RlbGF5X21pbnV0ZXMsCiAgICAgICAgICAgICAgICAgICAgICAgICAgIHJvdW5kKGF2ZyhjYXNlIHdoZW4gbWluX2RlbGF5ID4gMCB0aGVuIG1pbl9kZWxheSBlbmQpLCAyKQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYXMgYXZnX2RlbGF5X21pbnV0ZXNfd2hlbl9kZWxheWVkCiAgICAgICAgICAgICAgICAgICAgZnJvbSBtYWluLnNpbHZlcl9kZWxheXMKICAgICAgICAgICAgICAgICAgICB3aGVyZSBzdGF0aW9uIDw+ICcnCiAgICAgICAgICAgICAgICAgICAgZ3JvdXAgYnkgZXZlbnRfeWVhciwgbGluZV9jYW5vbmljYWwsIHN0YXRpb24KICAgICAgICAgICAgICAgICkKICAgICAgICAgICAgKQogICAgICAgICAgICB3aGVyZSBybiA8PSAxNQogICAgICAgICAgICBvcmRlciBieSBldmVudF95ZWFyLCBsaW5lX2Nhbm9uaWNhbCwgdG90YWxfZGVsYXlfbWludXRlcyBkZXNjCiAgICAgICAgIiIiLAogICAgICAgICMgVG9wIDEyIGRlbGF5IGNvZGVzIHBlciAoeWVhciwgbGluZSkuCiAgICAgICAgImNvZGVzX2J5X3llYXJfbGluZSI6ICIiIgogICAgICAgICAgICBzZWxlY3QgZXZlbnRfeWVhciwgbGluZV9jYW5vbmljYWwsIGNvZGUsIGRlc2NyaXB0aW9uLCBpbmNpZGVudHMsCiAgICAgICAgICAgICAgICAgICB0b3RhbF9kZWxheV9taW51dGVzCiAgICAgICAgICAgIGZyb20gKAogICAgICAgICAgICAgICAgc2VsZWN0ICosIHJvd19udW1iZXIoKSBvdmVyICgKICAgICAgICAgICAgICAgICAgICBwYXJ0aXRpb24gYnkgZXZlbnRfeWVhciwgbGluZV9jYW5vbmljYWwKICAgICAgICAgICAgICAgICAgICBvcmRlciBieSB0b3RhbF9kZWxheV9taW51dGVzIGRlc2MpIGFzIHJuCiAgICAgICAgICAgICAgICBmcm9tICgKICAgICAgICAgICAgICAgICAgICBzZWxlY3QgZXh0cmFjdCh5ZWFyIGZyb20gZXZlbnRfZGF0ZSk6OmludCBhcyBldmVudF95ZWFyLAogICAgICAgICAgICAgICAgICAgICAgICAgICBsaW5lX2Nhbm9uaWNhbCwgY29kZV9jbGVhbiBhcyBjb2RlLAogICAgICAgICAgICAgICAgICAgICAgICAgICBjb2FsZXNjZShhbnlfdmFsdWUoY29kZV9kZXNjcmlwdGlvbiksCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICdOb3QgaW4gcmVmZXJlbmNlIHRhYmxlJykgYXMgZGVzY3JpcHRpb24sCiAgICAgICAgICAgICAgICAgICAgICAgICAgIGNvdW50KCopIGFzIGluY2lkZW50cywKICAgICAgICAgICAgICAgICAgICAgICAgICAgc3VtKG1pbl9kZWxheSkgYXMgdG90YWxfZGVsYXlfbWludXRlcwogICAgICAgICAgICAgICAgICAgIGZyb20gbWFpbi5zaWx2ZXJfZGVsYXlzCiAgICAgICAgICAgICAgICAgICAgZ3JvdXAgYnkgZXZlbnRfeWVhciwgbGluZV9jYW5vbmljYWwsIGNvZGVfY2xlYW4KICAgICAgICAgICAgICAgICkKICAgICAgICAgICAgKQogICAgICAgICAgICB3aGVyZSBybiA8PSAxMgogICAgICAgICAgICBvcmRlciBieSBldmVudF95ZWFyLCBsaW5lX2Nhbm9uaWNhbCwgdG90YWxfZGVsYXlfbWludXRlcyBkZXNjCiAgICAgICAgIiIiLAogICAgfQogICAgZm9yIGtleSwgc3FsIGluIGJyZWFrZG93bl9xdWVyaWVzLml0ZW1zKCk6CiAgICAgICAgcm93cyA9IGNvbi5leGVjdXRlKHNxbCkuZmV0Y2hkZigpCiAgICAgICAgcGF5bG9hZFtrZXldID0ganNvbi5sb2Fkcyhyb3dzLnRvX2pzb24ob3JpZW50PSJyZWNvcmRzIiwgZGF0ZV9mb3JtYXQ9ImlzbyIpKQogICAgKERBU0hCT0FSRF9EQVRBX0RJUiAvICJkYXNoYm9hcmQuanNvbiIpLndyaXRlX3RleHQoanNvbi5kdW1wcyhwYXlsb2FkKSkKCgpkZWYgbWFpbigpIC0+IGRpY3Q6CiAgICBzdGFydGVkID0gZGF0ZXRpbWUubm93KHRpbWV6b25lLnV0YykKICAgIG1hbmlmZXN0ID0gaW5nZXN0LmRvd25sb2FkX2FsbCgpCiAgICBicm9uemUgPSB0cmFuc2Zvcm0uYnVpbGRfYnJvbnplKCkKICAgIHNpbHZlciA9IHRyYW5zZm9ybS5idWlsZF9zaWx2ZXIoYnJvbnplKQoKICAgIERBVEFfRElSLm1rZGlyKHBhcmVudHM9VHJ1ZSwgZXhpc3Rfb2s9VHJ1ZSkKICAgIGNvbiA9IGR1Y2tkYi5jb25uZWN0KHN0cihXQVJFSE9VU0VfUEFUSCkpCiAgICBjb24uZXhlY3V0ZSgiZHJvcCB0YWJsZSBpZiBleGlzdHMgc2lsdmVyX2RlbGF5cyIpCiAgICBjb24ucmVnaXN0ZXIoInNpbHZlcl9kZiIsIHNpbHZlcikKICAgIGNvbi5leGVjdXRlKCJjcmVhdGUgdGFibGUgc2lsdmVyX2RlbGF5cyBhcyBzZWxlY3QgKiBmcm9tIHNpbHZlcl9kZiIpCiAgICBjb24udW5yZWdpc3Rlcigic2lsdmVyX2RmIikKICAgIGNvbi5jbG9zZSgpICAjIER1Y2tEQiBpcyBzaW5nbGUtd3JpdGVyOiByZWxlYXNlIHRoZSBmaWxlIGJlZm9yZSBkYnQgb3BlbnMgaXQuCiAgICBkYnRfc3RhdHVzID0gX3J1bl9kYnQoKQogICAgY29uID0gZHVja2RiLmNvbm5lY3Qoc3RyKFdBUkVIT1VTRV9QQVRIKSwgcmVhZF9vbmx5PVRydWUpCgogICAgY2hlY2tzID0gcXVhbGl0eS5ydW5fY2hlY2tzKGJyb256ZSwgc2lsdmVyLCBydW5fZGF0ZT1zdGFydGVkLmRhdGUoKSkKICAgIHJ1bl9yZXBvcnQgPSB7CiAgICAgICAgInJ1bl9zdGFydGVkX3V0YyI6IHN0YXJ0ZWQuaXNvZm9ybWF0KCksCiAgICAgICAgInJ1bl9maW5pc2hlZF91dGMiOiBkYXRldGltZS5ub3codGltZXpvbmUudXRjKS5pc29mb3JtYXQoKSwKICAgICAgICAic291cmNlX3BhY2thZ2UiOiAidHRjLXN1YndheS1kZWxheS1kYXRhIChUb3JvbnRvIE9wZW4gRGF0YSAvIENLQU4pIiwKICAgICAgICAibWFuaWZlc3RfZmlsZXMiOiBtYW5pZmVzdFsiZmlsZXMiXSwKICAgICAgICAicm93X2NvdW50cyI6IHsKICAgICAgICAgICAgImJyb256ZSI6IGludChsZW4oYnJvbnplKSksCiAgICAgICAgICAgICJzaWx2ZXIiOiBpbnQobGVuKHNpbHZlcikpLAogICAgICAgICAgICAic2lsdmVyX3JlamVjdHNfb3JfZHVwbGljYXRlc19yZW1vdmVkIjogaW50KGxlbihicm9uemUpIC0gbGVuKHNpbHZlcikpLAogICAgICAgIH0sCiAgICAgICAgImRidCI6IGRidF9zdGF0dXMsCiAgICAgICAgImNoZWNrcyI6IHF1YWxpdHkuY2hlY2tzX2FzX2RpY3RzKGNoZWNrcyksCiAgICAgICAgImNoZWNrc19wYXNzZWQiOiBzdW0oMSBmb3IgYyBpbiBjaGVja3MgaWYgYy5wYXNzZWQpLAogICAgICAgICJjaGVja3NfdG90YWwiOiBsZW4oY2hlY2tzKSwKICAgIH0KCiAgICBleHBvcnRfZGFzaGJvYXJkKGNvbiwgcnVuX3JlcG9ydCkKICAgIGNvbi5jbG9zZSgpCgogICAgUkVQT1JUX0RJUi5ta2RpcihwYXJlbnRzPVRydWUsIGV4aXN0X29rPVRydWUpCiAgICAoUkVQT1JUX0RJUiAvICJsYXRlc3RfcnVuLmpzb24iKS53cml0ZV90ZXh0KGpzb24uZHVtcHMocnVuX3JlcG9ydCwgaW5kZW50PTIpKQogICAgbGluZXMgPSBbCiAgICAgICAgIiMgTGF0ZXN0IHBpcGVsaW5lIHJ1biIsICIiLAogICAgICAgIGYiLSBTdGFydGVkIChVVEMpOiB7cnVuX3JlcG9ydFsncnVuX3N0YXJ0ZWRfdXRjJ119IiwKICAgICAgICBmIi0gUm93czogYnJvbnplIHtsZW4oYnJvbnplKTosfSAtPiBzaWx2ZXIge2xlbihzaWx2ZXIpOix9IiwKICAgICAgICBmIi0gRGF0YSBxdWFsaXR5OiB7cnVuX3JlcG9ydFsnY2hlY2tzX3Bhc3NlZCddfS97cnVuX3JlcG9ydFsnY2hlY2tzX3RvdGFsJ119IGNoZWNrcyBwYXNzZWQiLCAiIiwKICAgICAgICAifCBDaGVjayB8IExheWVyIHwgUmVzdWx0IHwgTWVhc3VyZWQgfCBUaHJlc2hvbGQgfCIsCiAgICAgICAgInwtLS18LS0tfC0tLXwtLS18LS0tfCIsCiAgICBdCiAgICBmb3IgYyBpbiBydW5fcmVwb3J0WyJjaGVja3MiXToKICAgICAgICBsaW5lcy5hcHBlbmQoZiJ8IHtjWyduYW1lJ119IHwge2NbJ2xheWVyJ119IHwgeydQQVNTJyBpZiBjWydwYXNzZWQnXSBlbHNlICdGQUlMJ30gfCB7Y1snbWVhc3VyZWQnXX0gfCB7Y1sndGhyZXNob2xkJ119IHwiKQogICAgKFJFUE9SVF9ESVIgLyAibGF0ZXN0X3J1bi5tZCIpLndyaXRlX3RleHQoIlxuIi5qb2luKGxpbmVzKSArICJcbiIpCiAgICAjIEEgY29weSBhdCB0aGUgcmVwbyByb290IG9mIGRvY3MvIG1ha2VzIHRoZSByZXBvcnQgdmlzaWJsZSBvbiBHaXRIdWIuCiAgICBkb2NzX3JlcG9ydCA9IFJFUE9fUk9PVCAvICJkb2NzIiAvICJsYXRlc3RfcnVuLm1kIgogICAgZG9jc19yZXBvcnQud3JpdGVfdGV4dCgiXG4iLmpvaW4obGluZXMpICsgIlxuIikKICAgIHByaW50KGpzb24uZHVtcHMocnVuX3JlcG9ydCwgaW5kZW50PTIpKQogICAgcmV0dXJuIHJ1bl9yZXBvcnQKCgppZiBfX25hbWVfXyA9PSAiX19tYWluX18iOgogICAgbWFpbigpCg==
+"""Pipeline orchestration and dashboard export.
+
+Run:  python -m ttc_platform.run_pipeline
+Steps: ingest -> bronze -> silver -> load DuckDB -> dbt gold -> DQ checks
+-> run report (JSON + Markdown) -> dashboard JSON export.
+
+Idempotency: ingest skips unchanged files (SHA-256 manifest), bronze
+rewrites its partitions, silver and gold are full rebuilds of deterministic
+transforms over the same inputs, so re-running produces the same outputs.
+Full rebuild is the honest choice at this scale (~72k rows); the design doc
+explains where incremental models would slot in at production scale.
+"""
+from __future__ import annotations
+
+import json
+import subprocess
+import sys
+from datetime import datetime, timezone
+from pathlib import Path
+
+import duckdb
+import pandas as pd
+
+from . import ingest, quality, transform
+from .config import (
+    DASHBOARD_DATA_DIR,
+    DATA_DIR,
+    GOLD_DIR,
+    REPORT_DIR,
+    REPO_ROOT,
+    WAREHOUSE_PATH,
+)
+
+
+def _run_dbt() -> str:
+    import os
+    import shutil
+
+    dbt_dir = REPO_ROOT / "dbt"
+    dbt_bin = shutil.which("dbt") or str(Path(sys.executable).parent / "dbt")
+    env = {**os.environ, "TTC_DUCKDB_PATH": str(WAREHOUSE_PATH)}
+    proc = subprocess.run(
+        [dbt_bin, "run", "--project-dir", str(dbt_dir), "--profiles-dir", str(dbt_dir)],
+        capture_output=True, text=True, env=env,
+    )
+    if proc.returncode != 0:
+        raise RuntimeError(f"dbt run failed:\n{proc.stdout}\n{proc.stderr}")
+    return "success"
+
+
+# Short codes for canonical lines, used in the by-line dashboard exports so
+# the JSON stays small enough for the file-API upload caps. dashboard.json
+# carries the reverse map ("line_codes") so the files stay self-describing.
+LINE_SHORT_CODES = {
+    "LINE_1_YONGE_UNIVERSITY": "L1",
+    "LINE_2_BLOOR_DANFORTH": "L2",
+    "LINE_4_SHEPPARD": "L4",
+    "LINE_3_SCARBOROUGH_RT": "L3",
+    "MULTI_LINE_OR_NETWORK": "ML",
+    "UNKNOWN": "UNK",
+}
+
+
+def export_dashboard(con: duckdb.DuckDBPyConnection, run_report: dict) -> None:
+    DASHBOARD_DATA_DIR.mkdir(parents=True, exist_ok=True)
+    GOLD_DIR.mkdir(parents=True, exist_ok=True)
+    tables = ["daily_summary", "delays_by_line", "delays_by_station",
+              "delays_by_hour", "monthly_trend", "delays_by_code"]
+    payload: dict = {"run_report": run_report}
+    for table in tables:
+        rows = con.execute(f"select * from main.{table}").fetchdf()
+        rows.to_parquet(GOLD_DIR / f"{table}.parquet", index=False)
+        if table == "daily_summary":
+            continue  # exported below, alongside the filterable breakdowns
+        if table == "delays_by_station":
+            rows = rows.head(50)  # dashboard shows a leaderboard, not 1,489 free-text values
+        payload[table] = json.loads(rows.to_json(orient="records", date_format="iso"))
+    summary = con.execute(
+        """
+        select count(*) incidents, sum(min_delay) total_delay_minutes,
+               min(event_date)::varchar min_date, max(event_date)::varchar max_date,
+               count(distinct station) stations, count(distinct line_canonical) lines
+        from main.silver_delays
+        """
+    ).fetchone()
+    payload["headline"] = {
+        "incidents": int(summary[0]),
+        "total_delay_minutes": int(summary[1]),
+        "min_date": summary[2],
+        "max_date": summary[3],
+        "stations": int(summary[4]),
+        "lines": int(summary[5]),
+    }
+
+    # --- Filterable breakdowns -------------------------------------------
+    # The dashboard's line/year filters need aggregates at those grains,
+    # computed here from silver (never in the browser from raw rows).
+    # The export is split across three files, each small enough to ship
+    # through the GitHub/Vercel file APIs, which cap a single call:
+    #   dashboard.json      headline, gold tables, totals + hourly breakdown
+    #   tables_by_line.json monthly / station / code breakdowns by line
+    #   daily.json          daily series as compact arrays (see below)
+    # By-line rows carry a short line code in `line`; `line_codes` in
+    # dashboard.json maps it back to the canonical name, so the files stay
+    # self-describing.
+    payload["line_codes"] = {v: k for k, v in LINE_SHORT_CODES.items()}
+
+    def run_query(sql: str) -> list[dict]:
+        rows = con.execute(sql).fetchdf()
+        records = json.loads(rows.to_json(orient="records", date_format="iso"))
+        for r in records:
+            if "line_canonical" in r:
+                r["line"] = LINE_SHORT_CODES[r.pop("line_canonical")]
+        return records
+
+    # One row per (year, line): drives the headline cards under filters.
+    payload["totals_by_year_line"] = run_query("""
+        select extract(year from event_date)::int as event_year,
+               line_canonical, count(*) as incidents,
+               sum(min_delay) as total_delay_minutes,
+               count(distinct station) as stations
+        from main.silver_delays
+        group by event_year, line_canonical
+        order by event_year, line_canonical
+    """)
+    payload["hour_by_year_line"] = run_query("""
+        select extract(year from event_date)::int as event_year,
+               line_canonical, event_hour, count(*) as incidents,
+               sum(min_delay) as total_delay_minutes
+        from main.silver_delays
+        group by event_year, line_canonical, event_hour
+        order by event_year, line_canonical, event_hour
+    """)
+    tables_payload = {
+        "monthly_by_line": run_query("""
+            select event_year_month, line_canonical, count(*) as incidents,
+                   sum(min_delay) as total_delay_minutes
+            from main.silver_delays
+            group by event_year_month, line_canonical
+            order by event_year_month, line_canonical
+        """),
+        # Top 15 stations per (year, line); the all-years/all-lines view
+        # keeps using delays_by_station above.
+        "stations_by_year_line": run_query("""
+            select event_year, line_canonical, station, incidents,
+                   total_delay_minutes, avg_delay_minutes_when_delayed
+            from (
+                select *, row_number() over (
+                    partition by event_year, line_canonical
+                    order by total_delay_minutes desc) as rn
+                from (
+                    select extract(year from event_date)::int as event_year,
+                           line_canonical, station, count(*) as incidents,
+                           sum(min_delay) as total_delay_minutes,
+                           round(avg(case when min_delay > 0 then min_delay end), 2)
+                               as avg_delay_minutes_when_delayed
+                    from main.silver_delays
+                    where station <> ''
+                    group by event_year, line_canonical, station
+                )
+            )
+            where rn <= 15
+            order by event_year, line_canonical, total_delay_minutes desc
+        """),
+        # Top 12 delay codes per (year, line).
+        "codes_by_year_line": run_query("""
+            select event_year, line_canonical, code, description, incidents,
+                   total_delay_minutes
+            from (
+                select *, row_number() over (
+                    partition by event_year, line_canonical
+                    order by total_delay_minutes desc) as rn
+                from (
+                    select extract(year from event_date)::int as event_year,
+                           line_canonical, code_clean as code,
+                           coalesce(any_value(code_description),
+                                    'Not in reference table') as description,
+                           count(*) as incidents,
+                           sum(min_delay) as total_delay_minutes
+                    from main.silver_delays
+                    group by event_year, line_canonical, code_clean
+                )
+            )
+            where rn <= 12
+            order by event_year, line_canonical, total_delay_minutes desc
+        """),
+    }
+    (DASHBOARD_DATA_DIR / "dashboard.json").write_text(json.dumps(payload))
+    (DASHBOARD_DATA_DIR / "tables_by_line.json").write_text(json.dumps(tables_payload))
+
+    # Daily series as compact arrays, documented by daily_fields in the
+    # file itself: dates are epoch days (days since 1970-01-01) and lines
+    # use the same short codes. A per-day, per-line object format would
+    # repeat the full line name ~3,900 times and blow the upload cap.
+    daily = con.execute("select * from main.daily_summary").fetchdf()
+    epoch = pd.Timestamp("1970-01-01")
+    daily_rows = [
+        [int((pd.Timestamp(d) - epoch).days), int(i), int(v)]
+        for d, i, v in zip(daily["event_date"], daily["incidents"],
+                           daily["total_delay_minutes"])
+    ]
+    by_line = con.execute("""
+        select event_date, line_canonical, sum(min_delay) as total_delay_minutes
+        from main.silver_delays
+        group by event_date, line_canonical
+        order by event_date, line_canonical
+    """).fetchdf()
+    by_line_rows = [
+        [int((pd.Timestamp(d) - epoch).days), LINE_SHORT_CODES[line], int(v)]
+        for d, line, v in zip(by_line["event_date"], by_line["line_canonical"],
+                              by_line["total_delay_minutes"])
+    ]
+    daily_payload = {
+        "daily_fields": {
+            "daily_summary": ["epoch_day", "incidents", "total_delay_minutes"],
+            "daily_by_line": ["epoch_day", "line_code", "total_delay_minutes"],
+            "line_codes": "see line_codes in dashboard.json",
+        },
+        "daily_summary": daily_rows,
+        "daily_by_line": by_line_rows,
+    }
+    (DASHBOARD_DATA_DIR / "daily.json").write_text(json.dumps(daily_payload))
+
+
+def main() -> dict:
+    started = datetime.now(timezone.utc)
+    manifest = ingest.download_all()
+    bronze = transform.build_bronze()
+    silver = transform.build_silver(bronze)
+
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+    con = duckdb.connect(str(WAREHOUSE_PATH))
+    con.execute("drop table if exists silver_delays")
+    con.register("silver_df", silver)
+    con.execute("create table silver_delays as select * from silver_df")
+    con.unregister("silver_df")
+    con.close()  # DuckDB is single-writer: release the file before dbt opens it.
+    dbt_status = _run_dbt()
+    con = duckdb.connect(str(WAREHOUSE_PATH), read_only=True)
+
+    checks = quality.run_checks(bronze, silver, run_date=started.date())
+    run_report = {
+        "run_started_utc": started.isoformat(),
+        "run_finished_utc": datetime.now(timezone.utc).isoformat(),
+        "source_package": "ttc-subway-delay-data (Toronto Open Data / CKAN)",
+        "manifest_files": manifest["files"],
+        "row_counts": {
+            "bronze": int(len(bronze)),
+            "silver": int(len(silver)),
+            "silver_rejects_or_duplicates_removed": int(len(bronze) - len(silver)),
+        },
+        "dbt": dbt_status,
+        "checks": quality.checks_as_dicts(checks),
+        "checks_passed": sum(1 for c in checks if c.passed),
+        "checks_total": len(checks),
+    }
+
+    export_dashboard(con, run_report)
+    con.close()
+
+    REPORT_DIR.mkdir(parents=True, exist_ok=True)
+    (REPORT_DIR / "latest_run.json").write_text(json.dumps(run_report, indent=2))
+    lines = [
+        "# Latest pipeline run", "",
+        f"- Started (UTC): {run_report['run_started_utc']}",
+        f"- Rows: bronze {len(bronze):,} -> silver {len(silver):,}",
+        f"- Data quality: {run_report['checks_passed']}/{run_report['checks_total']} checks passed", "",
+        "| Check | Layer | Result | Measured | Threshold |",
+        "|---|---|---|---|---|",
+    ]
+    for c in run_report["checks"]:
+        lines.append(f"| {c['name']} | {c['layer']} | {'PASS' if c['passed'] else 'FAIL'} | {c['measured']} | {c['threshold']} |")
+    (REPORT_DIR / "latest_run.md").write_text("\n".join(lines) + "\n")
+    # A copy at the repo root of docs/ makes the report visible on GitHub.
+    docs_report = REPO_ROOT / "docs" / "latest_run.md"
+    docs_report.write_text("\n".join(lines) + "\n")
+    print(json.dumps(run_report, indent=2))
+    return run_report
+
+
+if __name__ == "__main__":
+    main()

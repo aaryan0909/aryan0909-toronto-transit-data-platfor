@@ -1,1 +1,106 @@
-IiIiVGVzdHMgZm9yIHRoZSBkYXNoYm9hcmQgSlNPTiBleHBvcnQsIGluY2x1ZGluZyB0aGUgZmlsdGVyIGJyZWFrZG93bnMuCgpSdW5zIGV4cG9ydF9kYXNoYm9hcmQgYWdhaW5zdCBhIHRpbnkgaW4tbWVtb3J5IER1Y2tEQiB3YXJlaG91c2UgYnVpbHQgZnJvbQpoYW5kLW1hZGUgcm93cywgc28gdGhlIHRlc3RzIG5ldmVyIHRvdWNoIHRoZSByZWFsIGRhdGEgb3IgdGhlIG5ldHdvcmsuCiIiIgppbXBvcnQganNvbgpmcm9tIGRhdGV0aW1lIGltcG9ydCBkYXRlCgppbXBvcnQgZHVja2RiCmltcG9ydCBwYW5kYXMgYXMgcGQKaW1wb3J0IHB5dGVzdAoKZnJvbSB0dGNfcGxhdGZvcm0gaW1wb3J0IHJ1bl9waXBlbGluZQoKCmRlZiBfd2FyZWhvdXNlKCkgLT4gZHVja2RiLkR1Y2tEQlB5Q29ubmVjdGlvbjoKICAgIGNvbiA9IGR1Y2tkYi5jb25uZWN0KCI6bWVtb3J5OiIpCiAgICBzaWx2ZXIgPSBwZC5EYXRhRnJhbWUoWwogICAgICAgICMgZGF0ZSwgaG91ciwgeW0sIHN0YXRpb24sIGNvZGUsIGRlc2MsIGRlbGF5LCBsaW5lCiAgICAgICAgKGRhdGUoMjAyNCwgMSwgMiksIDgsICIyMDI0LTAxIiwgIkJMT09SIFNUQVRJT04iLCAiUzEiLCAiREVTQyBPTkUiLCAxMCwgIkxJTkVfMV9ZT05HRV9VTklWRVJTSVRZIiksCiAgICAgICAgKGRhdGUoMjAyNCwgMSwgMiksIDksICIyMDI0LTAxIiwgIkJMT09SIFNUQVRJT04iLCAiUzEiLCAiREVTQyBPTkUiLCAwLCAiTElORV8xX1lPTkdFX1VOSVZFUlNJVFkiKSwKICAgICAgICAoZGF0ZSgyMDI0LCAyLCAzKSwgOCwgIjIwMjQtMDIiLCAiWU9OR0UgU1RBVElPTiIsICJTMiIsICJERVNDIFRXTyIsIDUsICJMSU5FXzJfQkxPT1JfREFORk9SVEgiKSwKICAgICAgICAoZGF0ZSgyMDI1LCAzLCA0KSwgMTcsICIyMDI1LTAzIiwgIkJMT09SIFNUQVRJT04iLCAiUzIiLCAiREVTQyBUV08iLCA3LCAiTElORV8xX1lPTkdFX1VOSVZFUlNJVFkiKSwKICAgICAgICAoZGF0ZSgyMDI1LCAzLCA0KSwgMTcsICIyMDI1LTAzIiwgIiIsICJTMiIsICJERVNDIFRXTyIsIDMsICJMSU5FXzJfQkxPT1JfREFORk9SVEgiKSwKICAgIF0sIGNvbHVtbnM9WyJldmVudF9kYXRlIiwgImV2ZW50X2hvdXIiLCAiZXZlbnRfeWVhcl9tb250aCIsICJzdGF0aW9uIiwKICAgICAgICAgICAgICAgICJjb2RlX2NsZWFuIiwgImNvZGVfZGVzY3JpcHRpb24iLCAibWluX2RlbGF5IiwgImxpbmVfY2Fub25pY2FsIl0pCiAgICBjb24ucmVnaXN0ZXIoInNpbHZlcl9kZiIsIHNpbHZlcikKICAgIGNvbi5leGVjdXRlKCJjcmVhdGUgdGFibGUgc2lsdmVyX2RlbGF5cyBhcyBzZWxlY3QgKiBmcm9tIHNpbHZlcl9kZiIpCiAgICBjb24udW5yZWdpc3Rlcigic2lsdmVyX2RmIikKICAgICMgR29sZCB0YWJsZXMgdGhlIGV4cG9ydCByZWFkcyBkaXJlY3RseSAoY29sdW1ucyBhcyB0aGUgZGJ0IG1vZGVscyBtYWtlIHRoZW0pLgogICAgY29uLmV4ZWN1dGUoIiIiY3JlYXRlIHRhYmxlIGRhaWx5X3N1bW1hcnkgYXMKICAgICAgICBzZWxlY3QgZXZlbnRfZGF0ZSwgY291bnQoKikgaW5jaWRlbnRzLCAwIGluY2lkZW50c193aXRoX2RlbGF5LAogICAgICAgICAgICAgICBzdW0obWluX2RlbGF5KSB0b3RhbF9kZWxheV9taW51dGVzLCAwLjAgYXZnX2RlbGF5X21pbnV0ZXNfd2hlbl9kZWxheWVkLAogICAgICAgICAgICAgICAxIHN0YXRpb25zX2FmZmVjdGVkIGZyb20gc2lsdmVyX2RlbGF5cyBncm91cCBieSBldmVudF9kYXRlIiIiKQogICAgY29uLmV4ZWN1dGUoIiIiY3JlYXRlIHRhYmxlIGRlbGF5c19ieV9saW5lIGFzCiAgICAgICAgc2VsZWN0IGxpbmVfY2Fub25pY2FsLCBjb3VudCgqKSBpbmNpZGVudHMsIHN1bShtaW5fZGVsYXkpIHRvdGFsX2RlbGF5X21pbnV0ZXMsCiAgICAgICAgICAgICAgIDAuMCBhdmdfZGVsYXlfbWludXRlc193aGVuX2RlbGF5ZWQsIDAuMCBwY3RfaW5jaWRlbnRzX3dpdGhfZGVsYXkKICAgICAgICBmcm9tIHNpbHZlcl9kZWxheXMgZ3JvdXAgYnkgbGluZV9jYW5vbmljYWwiIiIpCiAgICBjb24uZXhlY3V0ZSgiIiJjcmVhdGUgdGFibGUgZGVsYXlzX2J5X3N0YXRpb24gYXMKICAgICAgICBzZWxlY3Qgc3RhdGlvbiwgY291bnQoKikgaW5jaWRlbnRzLCBzdW0obWluX2RlbGF5KSB0b3RhbF9kZWxheV9taW51dGVzLAogICAgICAgICAgICAgICAwLjAgYXZnX2RlbGF5X21pbnV0ZXNfd2hlbl9kZWxheWVkIGZyb20gc2lsdmVyX2RlbGF5cwogICAgICAgIHdoZXJlIHN0YXRpb24gPD4gJycgZ3JvdXAgYnkgc3RhdGlvbiIiIikKICAgIGNvbi5leGVjdXRlKCIiImNyZWF0ZSB0YWJsZSBkZWxheXNfYnlfaG91ciBhcwogICAgICAgIHNlbGVjdCBldmVudF9ob3VyLCBjb3VudCgqKSBpbmNpZGVudHMsIHN1bShtaW5fZGVsYXkpIHRvdGFsX2RlbGF5X21pbnV0ZXMKICAgICAgICBmcm9tIHNpbHZlcl9kZWxheXMgZ3JvdXAgYnkgZXZlbnRfaG91ciIiIikKICAgIGNvbi5leGVjdXRlKCIiImNyZWF0ZSB0YWJsZSBtb250aGx5X3RyZW5kIGFzCiAgICAgICAgc2VsZWN0IGV2ZW50X3llYXJfbW9udGgsIGNvdW50KCopIGluY2lkZW50cywgc3VtKG1pbl9kZWxheSkgdG90YWxfZGVsYXlfbWludXRlcywKICAgICAgICAgICAgICAgMCBpbmNpZGVudHNfd2l0aF9kZWxheSBmcm9tIHNpbHZlcl9kZWxheXMgZ3JvdXAgYnkgZXZlbnRfeWVhcl9tb250aCIiIikKICAgIGNvbi5leGVjdXRlKCIiImNyZWF0ZSB0YWJsZSBkZWxheXNfYnlfY29kZSBhcwogICAgICAgIHNlbGVjdCBjb2RlX2NsZWFuIGFzIGNvZGUsIGNvZGVfZGVzY3JpcHRpb24gYXMgZGVzY3JpcHRpb24sIGNvdW50KCopIGluY2lkZW50cywKICAgICAgICAgICAgICAgc3VtKG1pbl9kZWxheSkgdG90YWxfZGVsYXlfbWludXRlcyBmcm9tIHNpbHZlcl9kZWxheXMgZ3JvdXAgYnkgY29kZV9jbGVhbiwgY29kZV9kZXNjcmlwdGlvbiIiIikKICAgIHJldHVybiBjb24KCgpAcHl0ZXN0LmZpeHR1cmUoKQpkZWYgcGF5bG9hZCh0bXBfcGF0aCwgbW9ua2V5cGF0Y2gpOgogICAgbW9ua2V5cGF0Y2guc2V0YXR0cihydW5fcGlwZWxpbmUsICJEQVNIQk9BUkRfREFUQV9ESVIiLCB0bXBfcGF0aCAvICJkYXNoIikKICAgIG1vbmtleXBhdGNoLnNldGF0dHIocnVuX3BpcGVsaW5lLCAiR09MRF9ESVIiLCB0bXBfcGF0aCAvICJnb2xkIikKICAgIGNvbiA9IF93YXJlaG91c2UoKQogICAgcnVuX3BpcGVsaW5lLmV4cG9ydF9kYXNoYm9hcmQoY29uLCB7ImNoZWNrc19wYXNzZWQiOiAwLCAiY2hlY2tzX3RvdGFsIjogMH0pCiAgICBjb24uY2xvc2UoKQogICAgcmV0dXJuIGpzb24ubG9hZHMoKHRtcF9wYXRoIC8gImRhc2giIC8gImRhc2hib2FyZC5qc29uIikucmVhZF90ZXh0KCkpCgoKZGVmIHRlc3RfZXhwb3J0X2luY2x1ZGVzX2RhaWx5X2FuZF9icmVha2Rvd25zKHBheWxvYWQpOgogICAgZm9yIGtleSBpbiBbImRhaWx5X3N1bW1hcnkiLCAidG90YWxzX2J5X3llYXJfbGluZSIsICJtb250aGx5X2J5X2xpbmUiLAogICAgICAgICAgICAgICAgImRhaWx5X2J5X2xpbmUiLCAiaG91cl9ieV95ZWFyX2xpbmUiLCAic3RhdGlvbnNfYnlfeWVhcl9saW5lIiwKICAgICAgICAgICAgICAgICJjb2Rlc19ieV95ZWFyX2xpbmUiLCAiZGVsYXlzX2J5X2xpbmUiLCAiaGVhZGxpbmUiXToKICAgICAgICBhc3NlcnQga2V5IGluIHBheWxvYWQsIGtleQogICAgYXNzZXJ0IGxlbihwYXlsb2FkWyJkYWlseV9zdW1tYXJ5Il0pID09IDMgICMgdGhyZWUgZGlzdGluY3QgZGF0ZXMgaW4gdGhlIGZpeHR1cmUKCgpkZWYgdGVzdF90b3RhbHNfYnlfeWVhcl9saW5lX3JlY29uY2lsZV93aXRoX2hlYWRsaW5lKHBheWxvYWQpOgogICAgcm93cyA9IHBheWxvYWRbInRvdGFsc19ieV95ZWFyX2xpbmUiXQogICAgYXNzZXJ0IHN1bShyWyJpbmNpZGVudHMiXSBmb3IgciBpbiByb3dzKSA9PSBwYXlsb2FkWyJoZWFkbGluZSJdWyJpbmNpZGVudHMiXSA9PSA1CiAgICBhc3NlcnQgc3VtKHJbInRvdGFsX2RlbGF5X21pbnV0ZXMiXSBmb3IgciBpbiByb3dzKSA9PSBwYXlsb2FkWyJoZWFkbGluZSJdWyJ0b3RhbF9kZWxheV9taW51dGVzIl0gPT0gMjUKICAgIGJ5X2tleSA9IHsoclsiZXZlbnRfeWVhciJdLCByWyJsaW5lX2Nhbm9uaWNhbCJdKTogciBmb3IgciBpbiByb3dzfQogICAgYXNzZXJ0IGJ5X2tleVsoMjAyNCwgIkxJTkVfMV9ZT05HRV9VTklWRVJTSVRZIildWyJpbmNpZGVudHMiXSA9PSAyCiAgICBhc3NlcnQgYnlfa2V5WygyMDI1LCAiTElORV8yX0JMT09SX0RBTkZPUlRIIildWyJ0b3RhbF9kZWxheV9taW51dGVzIl0gPT0gMwoKCmRlZiB0ZXN0X2JyZWFrZG93bl90b3Bfbl9hbmRfZW1wdHlfc3RhdGlvbl9ydWxlcyhwYXlsb2FkKToKICAgIHN0YXRpb25zID0gcGF5bG9hZFsic3RhdGlvbnNfYnlfeWVhcl9saW5lIl0KICAgIGFzc2VydCBhbGwoclsic3RhdGlvbiJdICE9ICIiIGZvciByIGluIHN0YXRpb25zKSAgIyBibGFuayBzdGF0aW9uIG5ldmVyIHJhbmtlZAogICAgYXNzZXJ0IGFsbChyWyJpbmNpZGVudHMiXSA+PSAxIGZvciByIGluIHN0YXRpb25zKQogICAgY29kZXMgPSB7KHJbImV2ZW50X3llYXIiXSwgclsibGluZV9jYW5vbmljYWwiXSwgclsiY29kZSJdKSBmb3IgciBpbiBwYXlsb2FkWyJjb2Rlc19ieV95ZWFyX2xpbmUiXX0KICAgIGFzc2VydCAoMjAyNCwgIkxJTkVfMV9ZT05HRV9VTklWRVJTSVRZIiwgIlMxIikgaW4gY29kZXMKCgpkZWYgdGVzdF9kYWlseV9ieV9saW5lX3N1bXNfdG9fZGFpbHlfc3VtbWFyeShwYXlsb2FkKToKICAgIGRhaWx5ID0ge3N0cihyWyJldmVudF9kYXRlIl0pWzoxMF06IHJbInRvdGFsX2RlbGF5X21pbnV0ZXMiXSBmb3IgciBpbiBwYXlsb2FkWyJkYWlseV9zdW1tYXJ5Il19CiAgICBieV9saW5lOiBkaWN0W3N0ciwgaW50XSA9IHt9CiAgICBmb3IgciBpbiBwYXlsb2FkWyJkYWlseV9ieV9saW5lIl06CiAgICAgICAgZCA9IHN0cihyWyJldmVudF9kYXRlIl0pWzoxMF0KICAgICAgICBieV9saW5lW2RdID0gYnlfbGluZS5nZXQoZCwgMCkgKyByWyJ0b3RhbF9kZWxheV9taW51dGVzIl0KICAgIGFzc2VydCBieV9saW5lID09IGRhaWx5Cg==
+"""Tests for the dashboard JSON export, including the filter breakdowns.
+
+Runs export_dashboard against a tiny in-memory DuckDB warehouse built from
+hand-made rows, so the tests never touch the real data or the network.
+The export ships as three files (dashboard.json, tables_by_line.json,
+daily.json); the fixture merges them the way the dashboard's JS does.
+"""
+import json
+from datetime import date
+
+import duckdb
+import pandas as pd
+import pytest
+
+from ttc_platform import run_pipeline
+
+
+def _warehouse() -> duckdb.DuckDBPyConnection:
+    con = duckdb.connect(":memory:")
+    silver = pd.DataFrame([
+        # date, hour, ym, station, code, desc, delay, line
+        (date(2024, 1, 2), 8, "2024-01", "BLOOR STATION", "S1", "DESC ONE", 10, "LINE_1_YONGE_UNIVERSITY"),
+        (date(2024, 1, 2), 9, "2024-01", "BLOOR STATION", "S1", "DESC ONE", 0, "LINE_1_YONGE_UNIVERSITY"),
+        (date(2024, 2, 3), 8, "2024-02", "YONGE STATION", "S2", "DESC TWO", 5, "LINE_2_BLOOR_DANFORTH"),
+        (date(2025, 3, 4), 17, "2025-03", "BLOOR STATION", "S2", "DESC TWO", 7, "LINE_1_YONGE_UNIVERSITY"),
+        (date(2025, 3, 4), 17, "2025-03", "", "S2", "DESC TWO", 3, "LINE_2_BLOOR_DANFORTH"),
+    ], columns=["event_date", "event_hour", "event_year_month", "station",
+                "code_clean", "code_description", "min_delay", "line_canonical"])
+    con.register("silver_df", silver)
+    con.execute("create table silver_delays as select * from silver_df")
+    con.unregister("silver_df")
+    # Gold tables the export reads directly (columns as the dbt models make them).
+    con.execute("""create table daily_summary as
+        select event_date, count(*) incidents, 0 incidents_with_delay,
+               sum(min_delay) total_delay_minutes, 0.0 avg_delay_minutes_when_delayed,
+               1 stations_affected from silver_delays group by event_date""")
+    con.execute("""create table delays_by_line as
+        select line_canonical, count(*) incidents, sum(min_delay) total_delay_minutes,
+               0.0 avg_delay_minutes_when_delayed, 0.0 pct_incidents_with_delay
+        from silver_delays group by line_canonical""")
+    con.execute("""create table delays_by_station as
+        select station, count(*) incidents, sum(min_delay) total_delay_minutes,
+               0.0 avg_delay_minutes_when_delayed from silver_delays
+        where station <> '' group by station""")
+    con.execute("""create table delays_by_hour as
+        select event_hour, count(*) incidents, sum(min_delay) total_delay_minutes
+        from silver_delays group by event_hour""")
+    con.execute("""create table monthly_trend as
+        select event_year_month, count(*) incidents, sum(min_delay) total_delay_minutes,
+               0 incidents_with_delay from silver_delays group by event_year_month""")
+    con.execute("""create table delays_by_code as
+        select code_clean as code, code_description as description, count(*) incidents,
+               sum(min_delay) total_delay_minutes from silver_delays group by code_clean, code_description""")
+    return con
+
+
+@pytest.fixture()
+def exported(tmp_path, monkeypatch):
+    monkeypatch.setattr(run_pipeline, "DASHBOARD_DATA_DIR", tmp_path / "dash")
+    monkeypatch.setattr(run_pipeline, "GOLD_DIR", tmp_path / "gold")
+    con = _warehouse()
+    run_pipeline.export_dashboard(con, {"checks_passed": 0, "checks_total": 0})
+    con.close()
+    dash = tmp_path / "dash"
+    merged = {}
+    for name in ["dashboard.json", "tables_by_line.json", "daily.json"]:
+        merged.update(json.loads((dash / name).read_text()))
+    return merged
+
+
+def test_export_includes_daily_and_breakdowns(exported):
+    for key in ["daily_summary", "daily_by_line", "daily_fields",
+                "totals_by_year_line", "monthly_by_line", "hour_by_year_line",
+                "stations_by_year_line", "codes_by_year_line",
+                "delays_by_line", "headline", "line_codes"]:
+        assert key in exported, key
+    assert len(exported["daily_summary"]) == 3  # three distinct dates in the fixture
+    assert exported["line_codes"]["L1"] == "LINE_1_YONGE_UNIVERSITY"
+
+
+def test_totals_by_year_line_reconcile_with_headline(exported):
+    rows = exported["totals_by_year_line"]
+    assert sum(r["incidents"] for r in rows) == exported["headline"]["incidents"] == 5
+    assert sum(r["total_delay_minutes"] for r in rows) == exported["headline"]["total_delay_minutes"] == 25
+    by_key = {(r["event_year"], r["line"]): r for r in rows}
+    assert by_key[(2024, "L1")]["incidents"] == 2
+    assert by_key[(2025, "L2")]["total_delay_minutes"] == 3
+
+
+def test_breakdown_top_n_and_empty_station_rules(exported):
+    stations = exported["stations_by_year_line"]
+    assert all(r["station"] != "" for r in stations)  # blank station never ranked
+    assert all(r["incidents"] >= 1 for r in stations)
+    codes = {(r["event_year"], r["line"], r["code"]) for r in exported["codes_by_year_line"]}
+    assert (2024, "L1", "S1") in codes
+
+
+def test_daily_by_line_sums_to_daily_summary(exported):
+    # Daily arrays: [epoch_day, incidents, delay] and [epoch_day, code, delay].
+    daily = {day: delay for day, _inc, delay in exported["daily_summary"]}
+    by_line: dict[int, int] = {}
+    for day, _code, delay in exported["daily_by_line"]:
+        by_line[day] = by_line.get(day, 0) + delay
+    assert by_line == daily
+    # Epoch day for 2024-01-02 is 19724; its all-lines delay is 10 minutes.
+    assert daily[19724] == 10

@@ -1,11 +1,15 @@
-# MANUAL STEP REQUIRED
-# The Muse GitHub App does not have permission to push files under
-# .github/workflows/ (GitHub returns 403), so this workflow is shipped as
-# documentation. To enable it, save this file's contents (below the comment
-# block) as .github/workflows/pipeline.yml in the repository.
+# LIVE FILE
+# The Muse GitHub App cannot push files under .github/workflows/ (GitHub
+# returns 403), so this workflow is managed by hand through the GitHub web
+# UI. Keep this text identical to the live file at
+# .github/workflows/pipeline.yml in the repository.
 #
-# What it does: runs the unit tests on every push, and runs the full
-# pipeline on a weekly schedule plus manual dispatch.
+# What it does: runs the unit tests on every push; runs the full pipeline on
+# a weekly schedule plus manual dispatch. The scheduled run publishes the
+# refreshed dashboard exports + run report back to main (which auto-deploys
+# the Vercel site) -- but only if the tests and every data-quality check
+# pass first. Pushes made with GITHUB_TOKEN do not re-trigger workflows, so
+# this cannot loop; Vercel still deploys because it listens to push webhooks.
 ---
 name: pipeline
 
@@ -36,6 +40,7 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install -e ".[dev]"
+      - run: pytest -q
       - run: python -m ttc_platform.run_pipeline
       - name: Fail loudly if a data-quality check failed
         run: |
@@ -46,3 +51,18 @@ jobs:
           print("failed checks:", failed)
           sys.exit(1 if failed else 0)
           PY
+      - name: Publish refreshed exports to main
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add dashboard/public/data/dashboard.json \
+                  dashboard/public/data/tables_by_line.json \
+                  dashboard/public/data/daily.json \
+                  dashboard/public/data/quarter.json \
+                  docs/latest_run.md
+          if git diff --quiet --cached; then
+            echo "no data changes to publish"
+          else
+            git commit -m "data: scheduled pipeline refresh $(date -u +%F)"
+            git push
+          fi

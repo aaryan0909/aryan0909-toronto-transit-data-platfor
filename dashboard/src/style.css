@@ -4,6 +4,8 @@ body { margin:0; font-family:system-ui,-apple-system,"Segoe UI",sans-serif; back
 header { display:flex; justify-content:space-between; gap:1rem; align-items:flex-end; padding:1.6rem 2rem 1rem; border-top:6px solid var(--red); flex-wrap:wrap; }
 h1 { margin:0; font-size:1.7rem; letter-spacing:-0.02em; }
 .sub { color:var(--muted); max-width:62ch; margin:.4rem 0 0; }
+.freshness { display:inline-block; font-size:.85rem; color:var(--muted); background:#f1f2f4; border:1px solid #d9dce1; border-radius:999px; padding:.25rem .75rem; margin:.6rem 0 0; }
+.freshness.stale { background:#fef3e2; border-color:#e5a83b; color:#7a5200; font-weight:600; }
 nav button { border:1px solid var(--line); background:var(--panel); padding:.5rem 1rem; border-radius:999px; cursor:pointer; font-size:.95rem; min-height:44px; }
 nav button.active { background:var(--ink); color:#fff; }
 main { padding:0 2rem 1rem; display:flex; flex-direction:column; gap:1rem; }

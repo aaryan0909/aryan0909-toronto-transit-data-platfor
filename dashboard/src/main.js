@@ -80,6 +80,20 @@ data.codes_by_quarter_line = quarter.codes_by_quarter_line.map(([event_year, eve
 const h = data.headline;
 const report = data.run_report;
 
+// --- Freshness badge ---------------------------------------------------------
+// Shows the newest source date and the last pipeline run in the header, and
+// turns amber once the data is older than the pipeline's 45-day freshness
+// threshold. The scheduled CI publishes fresh exports weekly (see the
+// pipeline workflow); this badge is the honest on-page face of that loop.
+const FRESHNESS_THRESHOLD_DAYS = 45;
+const prettyDate = (iso) => new Date(iso.length > 10 ? iso : iso + "T12:00:00Z")
+  .toLocaleDateString("en-CA", { month: "short", day: "numeric", year: "numeric" });
+const ageDays = Math.floor((Date.now() - new Date(h.max_date + "T12:00:00Z").getTime()) / 86400000);
+const badge = document.getElementById("freshness-badge");
+badge.innerHTML = `Data through ${prettyDate(h.max_date)} · Updated ${prettyDate(report.run_started_utc)}` +
+  (ageDays > FRESHNESS_THRESHOLD_DAYS ? ` · ${ageDays} days old` : "");
+if (ageDays > FRESHNESS_THRESHOLD_DAYS) badge.classList.add("stale");
+
 const state = { line: "ALL", period: "ALL", stationQuery: "" };
 // state.period is "ALL", a year ("2025"), or a quarter ("2025-Q3").
 const periodYear = () => (state.period === "ALL" ? null : Number(state.period.slice(0, 4)));

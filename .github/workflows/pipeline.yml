@@ -27,6 +27,7 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install -e ".[dev]"
+      - run: pytest -q
       - run: python -m ttc_platform.run_pipeline
       - name: Fail loudly if a data-quality check failed
         run: |
@@ -37,3 +38,18 @@ jobs:
           print("failed checks:", failed)
           sys.exit(1 if failed else 0)
           PY
+      - name: Publish refreshed exports to main
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add dashboard/public/data/dashboard.json \
+                  dashboard/public/data/tables_by_line.json \
+                  dashboard/public/data/daily.json \
+                  dashboard/public/data/quarter.json \
+                  docs/latest_run.md
+          if git diff --quiet --cached; then
+            echo "no data changes to publish"
+          else
+            git commit -m "data: scheduled pipeline refresh $(date -u +%F)"
+            git push
+          fi

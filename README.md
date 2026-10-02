@@ -125,7 +125,11 @@ that translates TTC-specific thresholds into that config.
   the same schema in separate XLSX files; adding them is a config change,
   documented in DESIGN.md.
 - Freshness is bounded by the publisher: the source updates monthly, so the
-  freshness check allows 45 days.
+  freshness check allows 45 days. The Monday CI schedule re-runs the pipeline
+  weekly and, when tests and all quality checks pass, commits the refreshed
+  dashboard exports + run report back to `main` so the live site updates on
+  its own. The dashboard header carries a "Data through … · Updated …" badge
+  that turns amber once the data is older than 45 days.
 - Gold is a full rebuild, not incremental. At ~72k rows that is the correct
   trade-off; DESIGN.md explains where incremental models would slot in.
 - Station-level analysis inherits the source's free-text station field. The
@@ -134,12 +138,14 @@ that translates TTC-specific thresholds into that config.
 
 ## What production would add
 
-An orchestrator (Dagster/Airflow) with retries and backfills, the GitHub
-Actions workflow shipped in `docs/github-actions-workflow.yml.txt` (the
-automation account cannot write `.github/workflows/` directly, so it is
-committed as documentation for a one-time manual add), alerting on failed
+An orchestrator (Dagster/Airflow) with retries and backfills, alerting on failed
 DQ checks, dbt tests beside the Python DQ suite, and a managed warehouse
-instead of a local DuckDB file. Details in [DESIGN.md](DESIGN.md).
+instead of a local DuckDB file. The GitHub Actions workflow
+(`.github/workflows/pipeline.yml`) is live: tests on every push, the full
+pipeline on a Monday schedule, and the scheduled run publishes fresh exports
+to `main` (which auto-deploys) when all checks pass. The canonical copy is
+kept in `docs/github-actions-workflow.yml.txt` because the automation account
+cannot write `.github/workflows/` directly. Details in [DESIGN.md](DESIGN.md).
 
 ## Source and licence of the data
 

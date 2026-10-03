@@ -30,7 +30,9 @@ td.num, th.num { text-align:right; font-variant-numeric:tabular-nums; }
 #station-search { width:100%; min-height:44px; padding:.5rem .6rem; margin-bottom:.6rem; border:1px solid var(--line); border-radius:8px; font-size:.95rem; }
 footer { padding:1rem 2rem 2rem; color:var(--muted); font-size:.88rem; }
 canvas { max-height:320px; }
-.takeaway { margin:.6rem 0 0; font-size:.9rem; color:var(--muted); }
+[hidden] { display:none !important; }
+
+.takeaway { margin:.6rem 0 0; font-sze:.9rem; color:var(--muted); }
 .chart-mobile { display:none; }
 .card .label a { color:var(--ink); }
 @media (max-width:640px){

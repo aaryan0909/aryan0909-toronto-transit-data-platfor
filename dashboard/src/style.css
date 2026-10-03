@@ -30,6 +30,17 @@ td.num, th.num { text-align:right; font-variant-numeric:tabular-nums; }
 #station-search { width:100%; min-height:44px; padding:.5rem .6rem; margin-bottom:.6rem; border:1px solid var(--line); border-radius:8px; font-size:.95rem; }
 footer { padding:1rem 2rem 2rem; color:var(--muted); font-size:.88rem; }
 canvas { max-height:320px; }
+.takeaway { margin:.6rem 0 0; font-size:.9rem; color:var(--muted); }
+.chart-mobile { display:none; }
+.card .label a { color:var(--ink); }
+@media (max-width:640px){
+  .chart-mobile { display:block; }
+  .chart-desktop { display:none; }
+}
+@media (max-width:480px){
+  .cards { grid-template-columns:1fr 1fr; }
+  #headline-cards .card:first-child { grid-column:1 / -1; }
+}
 code { font-size:.85em; }
 .visually-hidden { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
 .skeleton-bar { height:1.4rem; border-radius:6px; background:linear-gradient(90deg,var(--line) 25%,#f0eee9 50%,var(--line) 75%); background-size:200% 100%; animation:skeleton-pulse 1.4s ease-in-out infinite; }

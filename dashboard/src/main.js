@@ -10,6 +10,8 @@ const LINE_LABELS = {
   UNKNOWN: "Unknown (unmapped raw value)",
 };
 const lineLabel = (v) => LINE_LABELS[v] || v;
+// Short "Line N" form for the tight KPI labels.
+const shortLine = (v) => { const m = v.match(/^LINE_(\d)/); return m ? `Line ${m[1]}` : lineLabel(v); };
 
 function card(value, label) {
   return `<div class="card"><div class="value">${value}</div><div class="label">${label}</div></div>`;
@@ -140,6 +142,14 @@ const monthlyChart = makeChart("chart-monthly", {
   ] },
   options: { scales: { y: { position: "left" }, y1: { position: "right", grid: { drawOnChartArea: false } } } },
 });
+// Phones get the monthly series split instead of the dual-axis chart above:
+// incidents stay on the desktop canvas, delay minutes move here (single axis).
+const monthlyMinutesChart = makeChart("chart-monthly-minutes", {
+  data: { labels: [], datasets: [
+    { type: "line", label: "Delay minutes", data: [], borderColor: "#16181d", backgroundColor: "#16181d", tension: 0.25 },
+  ] },
+  options: { plugins: { legend: { display: false } }, scales: { x: { ticks: { maxTicksLimit: 8 } } } },
+});
 const dailyChart = makeChart("chart-daily", {
   data: { labels: [], datasets: [
     { type: "bar", label: "Delay minutes per day", data: [], backgroundColor: "#c8102e" },
@@ -168,13 +178,13 @@ function renderHeadline() {
   const rows = grainRows("totals_by_year_line", "totals_by_quarter_line").filter((r) => inGrain(r) && inLine(r));
   const incidents = rows.reduce((a, r) => a + r.incidents, 0);
   const delay = rows.reduce((a, r) => a + r.total_delay_minutes, 0);
-  const range = state.period === "ALL" ? `${h.min_date} to ${h.max_date}` : `in ${periodLabel()}`;
-  const scope = state.line === "ALL" ? `incidents, ${range}` : `incidents on ${lineLabel(state.line)}, ${range}`;
+  const range = state.period === "ALL" ? "all time" : periodLabel();
+  const scope = state.line === "ALL" ? `All lines · ${range}` : `${shortLine(state.line)} · ${range}`;
   document.getElementById("headline-cards").innerHTML = [
-    card(fmt(incidents), scope),
-    card(fmt(delay), "total recorded delay minutes (same selection)"),
-    card(fmt(h.stations), "distinct station values as published, all time (free-text field, see Data quality)"),
-    card(`${report.checks_passed}/${report.checks_total}`, "data-quality checks passed on the latest run"),
+    card(fmt(incidents), `incidents · ${scope}`),
+    card(fmt(delay), "total delay minutes"),
+    card(fmt(h.stations), 'distinct station values · <a href="#view-quality" data-goto-quality>free-text field</a>'),
+    card(`${report.checks_passed}/${report.checks_total}`, "checks passed, latest run"),
   ].join("");
   document.getElementById("filter-note").textContent =
     state.line === "ALL" && state.period === "ALL"
@@ -186,8 +196,15 @@ function renderMonthly() {
   const rows = state.line === "ALL"
     ? data.monthly_trend.filter((r) => inPeriodYM(r.event_year_month))
     : data.monthly_by_line.filter((r) => inLine(r) && inPeriodYM(r.event_year_month));
-  setChart(monthlyChart, rows.map((r) => r.event_year_month),
-    [rows.map((r) => r.incidents), rows.map((r) => r.total_delay_minutes)]);
+  const labels = rows.map((r) => r.event_year_month);
+  const incidents = rows.map((r) => r.incidents);
+  const minutes = rows.map((r) => r.total_delay_minutes);
+  setChart(monthlyChart, labels, [incidents, minutes]);
+  setChart(monthlyMinutesChart, labels, [minutes]); // the phone split
+  const peak = rows.reduce((a, r) => (!a || r.total_delay_minutes > a.total_delay_minutes ? r : a), null);
+  document.getElementById("takeaway-monthly").textContent = peak
+    ? `Peak month: ${peak.event_year_month} (${fmt(peak.incidents)} incidents, ${fmt(peak.total_delay_minutes)} delay minutes).`
+    : "";
 }
 
 function renderDaily() {
@@ -200,6 +217,10 @@ function renderDaily() {
     return Math.round(win.reduce((a, w) => a + w.delay, 0) / win.length);
   });
   setChart(dailyChart, rows.map((r) => r.date), [rows.map((r) => r.delay), rolling]);
+  const worst = rows.reduce((a, r) => (!a || r.delay > a.delay ? r : a), null);
+  document.getElementById("takeaway-daily").textContent = worst
+    ? `Worst day: ${worst.date} (${fmt(worst.delay)} delay minutes).`
+    : "";
 }
 
 function renderHour() {
@@ -212,6 +233,10 @@ function renderHour() {
       .sort((a, b) => a.event_hour - b.event_hour);
   }
   setChart(hourChart, rows.map((r) => `${r.event_hour}:00`), [rows.map((r) => r.total_delay_minutes)]);
+  const peakHour = rows.reduce((a, r) => (!a || r.total_delay_minutes > a.total_delay_minutes ? r : a), null);
+  document.getElementById("takeaway-hour").textContent = peakHour
+    ? `Busiest hour: ${peakHour.event_hour}:00 (${fmt(peakHour.total_delay_minutes)} delay minutes).`
+    : "";
 }
 
 function renderLineChart() {
@@ -222,6 +247,10 @@ function renderLineChart() {
     (r) => r.line_canonical, ["incidents", "total_delay_minutes"])
     .sort((a, b) => b.total_delay_minutes - a.total_delay_minutes);
   setChart(lineChart, rows.map((r) => lineLabel(r.line_canonical)), [rows.map((r) => r.total_delay_minutes)]);
+  const lineTotal = rows.reduce((a, r) => a + r.total_delay_minutes, 0);
+  document.getElementById("takeaway-line").textContent = rows.length && lineTotal
+    ? `${lineLabel(rows[0].line_canonical)} carries ${Math.round(rows[0].total_delay_minutes / lineTotal * 100)}% of the delay minutes.`
+    : "";
   table(document.getElementById("table-lines"),
     [{ t: "Line" }, { t: "Incidents", num: 1 }, { t: "Delay minutes", num: 1 }],
     rows.map((r) => [lineLabel(r.line_canonical), fmt(r.incidents), fmt(r.total_delay_minutes)]));
@@ -283,12 +312,24 @@ table(document.getElementById("table-manifest"),
 
 const overview = document.getElementById("view-overview");
 const quality = document.getElementById("view-quality");
-for (const [btn, showQuality] of [["nav-overview", false], ["nav-quality", true]]) {
+function setQualityView(showQuality) {
+  overview.hidden = showQuality;
+  quality.hidden = !showQuality;
+  document.getElementById("nav-overview").classList.toggle("active", !showQuality);
+  document.getElementById("nav-quality").classList.toggle("active", showQuality);
+}
+for (const [btn, show] of [["nav-overview", false], ["nav-quality", true]]) {
   document.getElementById(btn).addEventListener("click", (e) => {
-    overview.hidden = showQuality;
-    quality.hidden = !showQuality;
-    document.getElementById("nav-overview").classList.toggle("active", !showQuality);
-    document.getElementById("nav-quality").classList.toggle("active", showQuality);
+    setQualityView(show);
     e.currentTarget.blur();
   });
 }
+// The "free-text field" link inside the station KPI card jumps to the
+// Data quality view, where the 1,489-value caveat is spelled out.
+document.getElementById("headline-cards").addEventListener("click", (e) => {
+  if (e.target.closest("[data-goto-quality]")) {
+    e.preventDefault();
+    setQualityView(true);
+    window.scrollTo(0, 0);
+  }
+});

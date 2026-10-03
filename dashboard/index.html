@@ -50,20 +50,25 @@
       </section>
       <section class="panel">
         <h2>Monthly trend: incidents and delay minutes</h2>
-        <canvas id="chart-monthly"></canvas>
+        <canvas id="chart-monthly" class="chart-desktop"></canvas>
+        <canvas id="chart-monthly-minutes" class="chart-mobile"></canvas>
+        <p class="takeaway" id="takeaway-monthly"></p>
       </section>
       <section class="panel">
         <h2>Daily delay minutes, with 7-day rolling average</h2>
         <canvas id="chart-daily"></canvas>
+        <p class="takeaway" id="takeaway-daily"></p>
       </section>
       <div class="grid">
         <section class="panel">
           <h2>Delay minutes by hour of day</h2>
           <canvas id="chart-hour"></canvas>
+          <p class="takeaway" id="takeaway-hour"></p>
         </section>
         <section class="panel">
           <h2>Delay minutes by line</h2>
           <canvas id="chart-line"></canvas>
+          <p class="takeaway" id="takeaway-line"></p>
         </section>
       </div>
       <div class="grid">

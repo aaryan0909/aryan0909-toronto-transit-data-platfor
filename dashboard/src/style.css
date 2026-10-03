@@ -30,9 +30,12 @@ td.num, th.num { text-align:right; font-variant-numeric:tabular-nums; }
 #station-search { width:100%; min-height:44px; padding:.5rem .6rem; margin-bottom:.6rem; border:1px solid var(--line); border-radius:8px; font-size:.95rem; }
 footer { padding:1rem 2rem 2rem; color:var(--muted); font-size:.88rem; }
 canvas { max-height:320px; }
-[hidden] { display:none !important; }
-
 .takeaway { margin:.6rem 0 0; font-size:.9rem; color:var(--muted); }
+/* The [hidden] attribute must win over element display rules (e.g. main{display:flex})
+   so the Overview / Data quality view toggle actually hides a view. */
+[hidden] { display:none !important; }
+/* Visibility classes live on the wrapper divs, not the canvases: Chart.js writes
+   inline display styles onto the canvas elements themselves, which would beat the CSS. */
 .chart-mobile { display:none; }
 .card .label a { color:var(--ink); }
 @media (max-width:640px){

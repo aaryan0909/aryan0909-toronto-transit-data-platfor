@@ -18,7 +18,13 @@ from honest_checks import CheckResult, run_checks as _run_checks
 from .config import RAW_DIR
 
 # Thresholds live here, once, so a reader can argue with them in one place.
-FRESHNESS_MAX_AGE_DAYS = 45
+# The source package is republished monthly and its newest month can lag
+# the calendar by ~2 months (on 2026-10-20 the "since 2025" file still
+# ended Aug 31). A 45-day cap false-failed the DQ gate on 2026-10-19 and,
+# because the publish step sits behind the gate, froze the dashboard.
+# 75 days still catches a genuinely dead feed (~2 missed monthly cycles)
+# without blocking on publisher lag.
+FRESHNESS_MAX_AGE_DAYS = 75
 TIMESTAMP_PARSE_MIN_RATE = 0.99
 STATION_NULL_MAX_RATE = 0.01
 CODE_REFERENCE_MIN_RATE = 0.90

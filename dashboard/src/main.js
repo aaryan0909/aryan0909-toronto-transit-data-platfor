@@ -84,10 +84,10 @@ const report = data.run_report;
 
 // --- Freshness badge ---------------------------------------------------------
 // Shows the newest source date and the last pipeline run in the header, and
-// turns amber once the data is older than the pipeline's 45-day freshness
+// turns amber once the data is older than the pipeline's 75-day freshness
 // threshold. The scheduled CI publishes fresh exports weekly (see the
 // pipeline workflow); this badge is the honest on-page face of that loop.
-const FRESHNESS_THRESHOLD_DAYS = 45;
+const FRESHNESS_THRESHOLD_DAYS = 75;
 const prettyDate = (iso) => new Date(iso.length > 10 ? iso : iso + "T12:00:00Z")
   .toLocaleDateString("en-CA", { month: "short", day: "numeric", year: "numeric" });
 const ageDays = Math.floor((Date.now() - new Date(h.max_date + "T12:00:00Z").getTime()) / 86400000);

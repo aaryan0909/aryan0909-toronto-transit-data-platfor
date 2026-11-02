@@ -24,3 +24,7 @@ dashboard/dist/
 .DS_Store
 .idea/
 .vscode/
+
+# Environment files (never commit real secrets; .env.example stays tracked as a template)
+.env*
+!.env.example
